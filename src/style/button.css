@@ -1,0 +1,15 @@
+.button-cover {
+    margin: 2em auto;
+    padding: 0.25em 0 0 0;
+    width: 10%;
+    height: 4%;
+    position: absolute;
+    left: 25em;
+    border-radius: 0.5em;
+    box-shadow: 0 0.188em 1.550em -0.525em rgb(109, 106, 106);
+}
+
+.button-cover:hover{
+    cursor: pointer;
+    background-color: rgba(61, 121, 250, 0.301);
+}
