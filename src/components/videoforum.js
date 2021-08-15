@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import Forum from './forum';
 import Video from './video';
 import Quiz from './quiz';
-import Button from './button';
 
 const VideoForum = () => {
 
@@ -38,7 +37,6 @@ const VideoForum = () => {
                 <Quiz cquiz={cquiz} />
             </div>
 
-            <Button />
         </div>
 
     );

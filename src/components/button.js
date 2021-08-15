@@ -1,9 +1,9 @@
 import React from 'react';
 import '../style/button.css';
 
-const Button = () => {
+const Button = props => {
     return(
-        <div className="button-cover">
+        <div className="button-cover" onClick={props.onClick}>
             Ask Question
         </div>
     )
