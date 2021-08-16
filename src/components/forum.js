@@ -15,6 +15,11 @@ const Forum = props => {
     let disqus_config = () => {
         this.page.url = url;
         this.page.identifier = id;
+
+        this.callbacks.onNewComment = [function(comment) {
+            alert(comment.id);
+            alert(comment.text);
+      }];
     };
 
     (function () {

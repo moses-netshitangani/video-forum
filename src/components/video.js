@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import ReactPlayer from 'react-player';
 import Button from './button';
 import "../style/video.css";
@@ -11,6 +11,17 @@ const Video = () => {
 
     // ref to access the ReactPlayer
     const b = useRef(null);
+
+    const [play, onPlayChange] = useState(true);
+
+    // onProgress test
+    let oP = e => {
+        if(Math.floor(e.playedSeconds) === 7)
+        {
+            onPlayChange(false);
+        }
+    }
+
 
     // process the time elapsed
     const processTime = t => {
@@ -45,8 +56,9 @@ const Video = () => {
     return(
         <div className="video-cover">
             <ReactPlayer ref={b} className="player" controls
-            width="100%" height="90%"
-            url="https://www.youtube.com/watch?v=I2wURDqiXdM&t=3s" />
+            width="100%" height="100%" style={{margin: '0 auto'}}
+            onProgress={e => {oP(e)}} playing={play}
+            url="https://www.youtube.com/watch?v=O6P86uwfdR0" />
             
             <Button onClick={getElapsed} />
         </div>
