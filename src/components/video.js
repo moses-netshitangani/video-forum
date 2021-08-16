@@ -20,12 +20,11 @@ const Video = () => {
     // onProgress test
     let oP = e => {
         if(Math.floor(e.playedSeconds) === 7)
-        {
             onPlayChange(false);
-        }
         else
         {
-            onPlayChange(true);
+            if(!play)
+                onPlayChange(true);
         }
     }
 
