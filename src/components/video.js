@@ -12,16 +12,22 @@ const Video = () => {
     // ref to access the ReactPlayer
     const b = useRef(null);
 
+    // for quiz component
+    // to control when to pause and take quiz
     const [play, onPlayChange] = useState(true);
 
+    // for quiz component
     // onProgress test
     let oP = e => {
         if(Math.floor(e.playedSeconds) === 7)
         {
             onPlayChange(false);
         }
+        else
+        {
+            onPlayChange(true);
+        }
     }
-
 
     // process the time elapsed
     const processTime = t => {
