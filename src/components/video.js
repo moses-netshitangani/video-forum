@@ -19,7 +19,7 @@ const Video = () => {
     // for quiz component
     // onProgress test
     let oP = e => {
-        if(Math.floor(e.playedSeconds) === 7)
+        if(Math.floor(e.playedSeconds) === 7000)
             onPlayChange(false);
         else
         {
@@ -62,9 +62,9 @@ const Video = () => {
         <div className="video-cover">
             <ReactPlayer ref={b} className="player" controls
             width="100%" height="100%" style={{margin: '0 auto'}}
-            onProgress={e => {oP(e)}} playing={play}
-            url="https://www.youtube.com/watch?v=O6P86uwfdR0" />
-            
+            onProgress={e => {oP(e)}} playing={play} loop
+            // url="https://www.youtube.com/watch?v=O6P86uwfdR0" />
+            url="https://www.youtube.com/watch?v=RvZvXusfXLw" />
             <Button onClick={getElapsed} />
         </div>
 

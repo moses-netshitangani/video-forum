@@ -59,6 +59,8 @@
 
 .next:hover {
   cursor: pointer;
+  pointer-events: auto;
+  transform: scale(1.05);
 }
 
 .hide {

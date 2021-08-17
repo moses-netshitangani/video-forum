@@ -10,7 +10,8 @@
     box-shadow: 0 0.188em 1.550em -0.525em rgb(109, 106, 106);
 }
 
-.button-cover:hover{
+.button-cover:hover {
     cursor: pointer;
+    transform: scale(1.05);
     background-color: rgba(61, 121, 250, 0.301);
 }

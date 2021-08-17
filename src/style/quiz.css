@@ -5,3 +5,53 @@
     padding: 1em;
     border-radius: 0.9em;
 }
+
+.question {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.option {
+    background-color: rgba(43, 122, 226, 0.253);
+    margin: 2.5em auto;
+    border-radius: 0.75em;
+    width: 98%;
+    height: 12.5%;
+    display: flex;
+    align-content: space-around;
+}
+
+.option:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.option-img {
+    width: 12.5%;
+    height: 100%;
+    border-radius: 0.75em;
+}
+
+.checked1 {
+    background-color: white;
+}
+
+.unchecked1 {background-color: black;}
+
+.checked2 {
+    background-color: white;
+}
+
+.unchecked2 {background-color: black;}
+
+.checked3 {
+    background-color: white;
+}
+
+.unchecked3 {background-color: black;}
+
+.checked4 {
+    background-color: white;
+}
+
+.unchecked4 {background-color: black;}
