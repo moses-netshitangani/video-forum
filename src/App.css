@@ -51,16 +51,18 @@
   height: 1.5em;
   background-image: url('./imgs/exchange.png');
   background-position: center;
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
   position: absolute;
   top: 3.75em;
   right: 17em;
+  transition: transform 0.5s;
 }
 
 .next:hover {
   cursor: pointer;
   pointer-events: auto;
-  transform: scale(1.05);
+  transform: scale(1.2);
 }
 
 .hide {

@@ -4,6 +4,7 @@
     margin: 0 0 0 1em;
     padding: 1em;
     border-radius: 0.9em;
+    position: relative;
 }
 
 .question {
@@ -13,12 +14,18 @@
 
 .option {
     background-color: rgba(43, 122, 226, 0.253);
-    margin: 2.5em auto;
+    margin: 2em auto;
+    padding: 0.025em;
     border-radius: 0.75em;
     width: 98%;
     height: 12.5%;
     display: flex;
     align-content: space-around;
+    transition: transform 0.5s;
+}
+
+.option p {
+    margin: auto 0.5em;
 }
 
 .option:hover {
@@ -28,30 +35,68 @@
 
 .option-img {
     width: 12.5%;
-    height: 100%;
+    max-height: 100%;
     border-radius: 0.75em;
-}
-
-.checked1 {
+    border: 2px solid rgba(43, 122, 226, 0.644);
     background-color: white;
 }
 
-.unchecked1 {background-color: black;}
-
-.checked2 {
-    background-color: white;
+.correct {
+    background-image: url('../imgs/correct.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 12.5%;
+    max-height: 100%;
 }
 
-.unchecked2 {background-color: black;}
-
-.checked3 {
-    background-color: white;
+.incorrect {
+    background-image: url('../imgs/incorrect.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
-.unchecked3 {background-color: black;}
 
-.checked4 {
-    background-color: white;
+.feedback {
+    background-color: rgba(94, 132, 182, 0.377);
+    border-radius: 0.5em;
+    width: 60%;
+    height: 10%;
+    margin: 0 auto;
 }
 
-.unchecked4 {background-color: black;}
+.green {
+    border: 3px solid rgb(148, 255, 127);
+    background-color: rgba(0, 128, 0, 0.753);
+}
+
+.red {
+    border: 3px solid red;
+    background-color: rgb(151, 5, 5);
+}
+
+.right {
+    color: rgb(148, 255, 127);
+}
+
+.wrong {
+    color: red;
+}
+
+.false {
+    display: none;
+}
+
+.true {
+    display: initial;
+    margin-top: 0.5em;
+}
+
+.lock {
+    background-color: rgba(0, 255, 255, 0);
+    width: 95%;
+    height: 80%;
+    position: absolute;
+    margin: 0 auto;
+}

@@ -3,46 +3,78 @@ import "../style/quiz.css";
 
 const Quiz = props => {
 
-    // select an option
-    const [check1, onCheckChange1] = useState('unchecked1');
-    const [check2, onCheckChange2] = useState('unchecked2');
-    const [check3, onCheckChange3] = useState('unchecked3');
-    const [check4, onCheckChange4] = useState('unchecked4');
+    // quiz feedback
+    const [showCorrect, onShowCorrect] = useState('false');
+    const [showIncorrect, onShowIncorrect] = useState('false');
+    const [showFb, onShowFb] = useState('false');
+    const [lock, onLock] = useState('false');
 
-    let option = id => {
-        alert(id);
-        if(`check${id}` === `unchecked${id}`)
-            `onCheckChange${id}`("checked"+id);
-        else
-            `onCheckChange${id}`("unchecked"+id);
+    // quiz logic
+    const quizComp = {
+        question: 'What is a variable?',
+        options: ['Option A', 'Option B', 'Option C', 'Option D'],
+        correct: 'Option B'
     }
+
+    const checkAnswer = num => {
+            if(quizComp.correct === quizComp.options[num - 1])
+            {
+                document.getElementById(`${num}`).className = 'option-img correct';
+                
+                // show feedback
+                onShowFb('feedback green');
+                onShowCorrect('true');
+            }
+            else
+            {
+                document.getElementById(`${num}`).className = 'option-img incorrect';
+                
+                // show feedback
+                onShowFb('feedback red');
+                onShowIncorrect('true')
+            }
+
+            // lock quiz
+            onLock('lock');
+    }
+
+    
+
 
     return(
         <div className={`quiz-cover ${props.cquiz}`}>
+            {/* invisible page for locking quiz */}
+            <div className={lock}></div>
+
             {/* question */}
             <div className="question">
-                <h4>What is a variable?</h4>
+                <h4>{quizComp.question}</h4>
             </div>
 
             {/* options */}
-            <div className="option A">
-                <div className={`option-img ${check1}`} onClick={() => {onCheckChange1('checked1')}}></div>
-                <p className="text">Option A goes here</p>
+            <div className="option" onClick={() => {checkAnswer(1)}}>
+                <div className={`option-img`} id='1'></div>
+                <p className="text">{quizComp.options[0]}</p>
             </div>
 
-            <div className="option B">
-                <div className={`option-img ${check2}`} onClick={() => {onCheckChange2('checked2')}}></div>
-                <p className="text">Option B goes here</p>
+            <div className="option" onClick={() => {checkAnswer(2)}}>
+                <div className={`option-img`} id='2' ></div>
+                <p className="text">{quizComp.options[1]}</p>
             </div>
 
-            <div className="option C">
-                <div className={`option-img ${check3}`} onClick={() => {onCheckChange3('checked3')}}></div>
-                <p className="text">Option C goes here</p>
+            <div className="option" onClick={() => {checkAnswer(3)}}>
+                <div className={`option-img`} id='3' ></div>
+                <p className="text">{quizComp.options[2]}</p>
             </div>
 
-            <div className="option D">
-                <div className={`option-img ${check4}`} onClick={() => {onCheckChange4('checked4')}}></div>
-                <p className="text">Option D goes here</p>
+            <div className="option" onClick={() => {checkAnswer(4)}}>
+                <div className={`option-img`} id='4' ></div>
+                <p className="text">{quizComp.options[3]}</p>
+            </div>
+
+            <div className={showFb}>
+                <h4 className={`right ${showCorrect}`}>Correct!</h4>
+                <h4 className={`wrong ${showIncorrect}`}>Correct Answer is {quizComp.correct}</h4>
             </div>
 
         </div>

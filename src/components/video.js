@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import ReactPlayer from 'react-player';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import Button from './button';
 import "../style/video.css";
 
@@ -55,7 +56,7 @@ const Video = () => {
     const getElapsed = () => {
         time = b.current.getCurrentTime();
         processTime(time);
-        alert(timeString);
+        return timeString;
     }
 
     return(
@@ -64,9 +65,15 @@ const Video = () => {
             width="100%" height="100%" style={{margin: '0 auto'}}
             onProgress={e => {oP(e)}} playing={play} loop
             // url="https://www.youtube.com/watch?v=O6P86uwfdR0" />
-            url="https://www.youtube.com/watch?v=RvZvXusfXLw" />
-            <Button onClick={getElapsed} />
+            url="https://www.youtube.com/watch?v=YvkHPdsjQQs" />
+
+            <CopyToClipboard text={() => {getElapsed()}} onCopy={e => alert(e)}>
+                {/* <Button onClick={getElapsed} /> */}
+                <span>Shoot</span>
+            </CopyToClipboard>
         </div>
+
+        
 
 
     );
