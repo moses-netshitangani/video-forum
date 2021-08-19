@@ -30,8 +30,14 @@ const Quiz = props => {
         }
     }
 
+    const submitAns = () => {
+        onLock('lock');
+        alert(selectedAns);
+    }
+
     return(
         <div className={`quiz-cover ${props.cquiz}`}>
+
             {/* invisible page for locking quiz */}
             <div className={lock}></div>
 
@@ -69,7 +75,7 @@ const Quiz = props => {
                 <p className="text">{quizComp.options[3]}</p>
             </div>
 
-            <div className="submit-btn" onClick={() => {alert(selectedAns)}}>
+            <div className="submit-btn" onClick={() => {submitAns()}}>
                 Submit
             </div>
 

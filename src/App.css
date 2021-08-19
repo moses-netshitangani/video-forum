@@ -72,3 +72,24 @@
 .show {
   display: initial;
 }
+
+.switch-tab {
+  background-color: rgba(43, 122, 226, 0.082);
+  width: 6%;
+  height: 4%;
+  border-radius: 0.9em 0.9em 0 0;
+  position: absolute;
+  right: 2.3em;
+  top: 8.75%;
+  padding-top: 0.25em;
+  transition: 0.25s;
+}
+
+.switch-tab:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.frm {
+  right: 8.75%;
+}
