@@ -3,10 +3,8 @@ import "../style/quiz.css";
 
 const Quiz = props => {
 
-    // quiz feedback
-    const [showCorrect, onShowCorrect] = useState('false');
-    const [showIncorrect, onShowIncorrect] = useState('false');
-    const [showFb, onShowFb] = useState('false');
+    // quiz answer
+    let selectedAns = '';
     const [lock, onLock] = useState('false');
 
     // quiz logic
@@ -17,29 +15,20 @@ const Quiz = props => {
     }
 
     const checkAnswer = num => {
-            if(quizComp.correct === quizComp.options[num - 1])
+
+        for(let i = 1; i < 5; i++)
+        {
+            if(i === num)
             {
-                document.getElementById(`${num}`).className = 'option-img correct';
-                
-                // show feedback
-                onShowFb('feedback green');
-                onShowCorrect('true');
+                document.getElementById(`${num}`).className = 'selected';
+                selectedAns = quizComp.options[num - 1];
             }
             else
             {
-                document.getElementById(`${num}`).className = 'option-img incorrect';
-                
-                // show feedback
-                onShowFb('feedback red');
-                onShowIncorrect('true')
+                document.getElementById(`${i}`).className = 'false';
             }
-
-            // lock quiz
-            onLock('lock');
+        }
     }
-
-    
-
 
     return(
         <div className={`quiz-cover ${props.cquiz}`}>
@@ -53,29 +42,37 @@ const Quiz = props => {
 
             {/* options */}
             <div className="option" onClick={() => {checkAnswer(1)}}>
-                <div className={`option-img`} id='1'></div>
+                <div className={`option-img`} >
+                    <div className='false' id='1'></div>
+                </div>
                 <p className="text">{quizComp.options[0]}</p>
             </div>
 
             <div className="option" onClick={() => {checkAnswer(2)}}>
-                <div className={`option-img`} id='2' ></div>
+                <div className={`option-img`} >
+                    <div className='false' id='2'></div>
+                </div>
                 <p className="text">{quizComp.options[1]}</p>
             </div>
 
             <div className="option" onClick={() => {checkAnswer(3)}}>
-                <div className={`option-img`} id='3' ></div>
+                 <div className={`option-img`} >
+                    <div className='false' id='3'></div>
+                </div>
                 <p className="text">{quizComp.options[2]}</p>
             </div>
 
             <div className="option" onClick={() => {checkAnswer(4)}}>
-                <div className={`option-img`} id='4' ></div>
+                <div className={`option-img`} >
+                    <div className='false' id='4'></div>
+                </div>
                 <p className="text">{quizComp.options[3]}</p>
             </div>
 
-            <div className={showFb}>
-                <h4 className={`right ${showCorrect}`}>Correct!</h4>
-                <h4 className={`wrong ${showIncorrect}`}>Correct Answer is {quizComp.correct}</h4>
+            <div className="submit-btn" onClick={() => {alert(selectedAns)}}>
+                Submit
             </div>
+
 
         </div>
     )

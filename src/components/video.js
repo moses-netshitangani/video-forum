@@ -13,21 +13,28 @@ const Video = () => {
     // ref to access the ReactPlayer
     const b = useRef(null);
 
+    // seek back to quiz
+    const seekBack = () => {
+        b.current.seekTo(7, 'seconds');
+    }
+
     // for quiz component
     // to control when to pause and take quiz
     const [play, onPlayChange] = useState(true);
 
-    // for quiz component
-    // onProgress test
     let oP = e => {
-        if(Math.floor(e.playedSeconds) === 7000)
-            onPlayChange(false);
+        if(Math.floor(e.playedSeconds) >= 7)
+        {
+            // onPlayChange(false);
+            // seekBack()
+        }
         else
         {
             if(!play)
                 onPlayChange(true);
         }
     }
+
 
     // process the time elapsed
     const processTime = t => {
@@ -56,7 +63,7 @@ const Video = () => {
     const getElapsed = () => {
         time = b.current.getCurrentTime();
         processTime(time);
-        return timeString;
+        alert(timeString);
     }
 
     return(
@@ -65,12 +72,11 @@ const Video = () => {
             width="100%" height="100%" style={{margin: '0 auto'}}
             onProgress={e => {oP(e)}} playing={play} loop
             // url="https://www.youtube.com/watch?v=O6P86uwfdR0" />
-            url="https://www.youtube.com/watch?v=YvkHPdsjQQs" />
+            url="https://www.youtube.com/watch?v=lIlMtVGI5Pg" />
 
-            <CopyToClipboard text={() => {getElapsed()}} onCopy={e => alert(e)}>
-                {/* <Button onClick={getElapsed} /> */}
-                <span>Shoot</span>
-            </CopyToClipboard>
+            {/* <CopyToClipboard text={timeString} onCopy={e => alert(e)}> */}
+                <Button onClick={getElapsed} />
+            {/* </CopyToClipboard> */}
         </div>
 
         

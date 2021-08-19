@@ -1,0 +1,38 @@
+.stats-cover {
+    margin: 0 auto;
+    width: 60%;
+    height: 30em;
+    background-color: cornflowerblue;
+}
+
+.bar-cover {
+    width: 80%;
+    height: 80%;
+    display: flex;
+    justify-content: space-evenly;
+    background-color: aqua;
+    margin: 0 auto;
+    /* position: relative; */
+}
+
+.bar {
+    width: 10%;
+    background-color: blueviolet;
+    display: block;
+}
+
+.a {
+    height: 40%;
+}
+
+.b {
+    height: 80%;
+}
+
+.c {
+    height: 20%;
+}
+
+.d {
+    height: 30%;
+}

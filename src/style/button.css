@@ -7,7 +7,7 @@
     bottom: 0.5em;
     left: 25em;
     border-radius: 0.5em;
-    box-shadow: 0 0.188em 1.550em -0.525em rgb(109, 106, 106);
+    box-shadow: 0 0.188em 1.550em -0.525em rgb(73, 71, 71);
     transition: transform 0.5s;
 }
 
@@ -15,4 +15,5 @@
     cursor: pointer;
     transform: scale(1.05);
     background-color: rgba(61, 121, 250, 0.301);
+    color: rgb(46, 137, 255);
 }
