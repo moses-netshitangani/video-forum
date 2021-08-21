@@ -1,0 +1,49 @@
+.admin-cover {
+    background-color: rgba(0, 0, 255, 0.377);
+    display: flex;
+    justify-content: space-around;
+    margin: 2em auto;
+    height: 40em;
+}
+
+.create-cover {
+    width: 50%;
+}
+
+.create-video {
+    height: 15em;
+    background-color: bisque;
+    width: 50%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.quiz-template {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 80%;
+    height: 20em;
+    margin: 0 auto;
+    border: 2px solid rgb(255, 0, 221);
+}
+
+.admin-cover input {
+    width: 60%;
+    height: 12.5%;
+    border: 0px solid transparent;
+    border-radius: 0.9em;
+    background-color: rgb(233, 232, 232);
+    margin: 0 auto;
+}
+
+.quiz-template #q {
+    width: 90%;
+    height: 20%;
+}
+
+input:focus {
+    outline: none;
+}

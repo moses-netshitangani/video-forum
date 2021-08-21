@@ -31,8 +31,13 @@ const Quiz = props => {
     }
 
     const submitAns = () => {
-        onLock('lock');
-        alert(selectedAns);
+        if(selectedAns !== '')
+        {
+            onLock('lock');
+            alert(selectedAns);
+        }
+        else
+            alert("Choose a single option");
     }
 
     return(
