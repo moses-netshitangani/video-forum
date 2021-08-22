@@ -1,8 +1,8 @@
 .admin-cover {
-    background-color: rgba(0, 0, 255, 0.377);
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     margin: 2em auto;
+    width: 95%;
     height: 40em;
 }
 
@@ -12,7 +12,8 @@
 
 .create-video {
     height: 15em;
-    background-color: bisque;
+    border-radius: 0.75em;
+    box-shadow: 0 0.188em 1.550em -0.525em rgb(73, 71, 71);
     width: 50%;
     height: 80%;
     display: flex;
@@ -23,16 +24,17 @@
 .quiz-template {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-evenly;
     width: 80%;
-    height: 20em;
+    height: 27.5em;
     margin: 0 auto;
-    border: 2px solid rgb(255, 0, 221);
+    border-radius: 0.75em;
+    box-shadow: 0 0.188em 1.550em -0.525em rgb(73, 71, 71);
 }
 
 .admin-cover input {
     width: 60%;
-    height: 12.5%;
+    height: 10%;
     border: 0px solid transparent;
     border-radius: 0.9em;
     background-color: rgb(233, 232, 232);
@@ -41,7 +43,7 @@
 
 .quiz-template #q {
     width: 90%;
-    height: 20%;
+    height: 15%;
 }
 
 input:focus {
@@ -50,11 +52,22 @@ input:focus {
 
 #submit-link {
     display: flex;
-    background-color: cadetblue;
     height: 10%;
     padding: 1em;
+    align-items: center;
 }
 
 #submit-link input {
     height: 60%;
+}
+
+#t {
+    width: 25%;
+    text-align: center;
+}
+
+.c {
+    position: inherit;
+    height: 2em;
+    width: 10em;
 }

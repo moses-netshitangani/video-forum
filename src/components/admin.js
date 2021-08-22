@@ -1,8 +1,15 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import ReactPlayer from 'react-player';
 import '../style/admin.css';
 
 const Admin = () => {
+
+    // ref to access the ReactPlayer
+    const player = useRef(null);
+
+    // get video length
+    const [len, changeLen] = useState('0');
+
 
     const [url, OnUrl] = useState("https://");
 
@@ -12,11 +19,12 @@ const Admin = () => {
 
     const getLink = () => {
         OnUrl(document.getElementById('link').value);
+        changeLen(`${player.current.getDuration()}`);
     }
 
     return (
         <div>
-            Admin page
+            <h3>Admin Page</h3>
             
             <div className='admin-cover'>
                 {/* Lecture Video */}
@@ -24,13 +32,11 @@ const Admin = () => {
 
                     <div id='submit-link'>
                         <input type='text' id='link' placeholder='Lecture video YouTube link'/>
-                        <div onClick={getLink}>Submit link</div>
+                        <div onClick={getLink} className='button-cover c'>Link Video</div>
                     </div>
 
-                    <ReactPlayer controls
-                    width="95%" height="75%" style={{margin: '0 auto'}}
-                    // url="https://www.youtube.com/watch?v=O6P86uwfdR0" />
-                    url={url} />
+                    <ReactPlayer controls ref={player} width="95%"
+                     height="75%" style={{margin: '0 auto'}} url={url} />
 
                 </div>
 
@@ -43,13 +49,16 @@ const Admin = () => {
                         <input type='text' placeholder='Option B' />
                         <input type='text' placeholder='Option C' />
                         <input type='text' placeholder='Option D' />
+                        <input type='text' placeholder='Correct Option' />
+                        <input type='text' placeholder='Time in [mm:ss] format' id='t' required />
                     </div>
-
-                    <div>
+                    
+                    <div className="button-cover c">
                         Create Quiz
                     </div>
 
                 </div>
+                
             </div>
             
         </div>
