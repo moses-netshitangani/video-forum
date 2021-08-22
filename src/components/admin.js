@@ -1,8 +1,18 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ReactPlayer from 'react-player';
 import '../style/admin.css';
 
 const Admin = () => {
+
+    const [url, OnUrl] = useState("https://");
+
+    const fetchVid = link => {
+        console.log(link.target)
+    }
+
+    const getLink = () => {
+        OnUrl(document.getElementById('link').value);
+    }
 
     return (
         <div>
@@ -11,11 +21,17 @@ const Admin = () => {
             <div className='admin-cover'>
                 {/* Lecture Video */}
                 <div className='create-video'>
-                    <input type='text' placeholder='Lecture video YouTube link'/>
+
+                    <div id='submit-link'>
+                        <input type='text' id='link' placeholder='Lecture video YouTube link'/>
+                        <div onClick={getLink}>Submit link</div>
+                    </div>
+
                     <ReactPlayer controls
                     width="95%" height="75%" style={{margin: '0 auto'}}
                     // url="https://www.youtube.com/watch?v=O6P86uwfdR0" />
-                    url="https://www.youtube.com/watch?v=lIlMtVGI5Pg" />
+                    url={url} />
+
                 </div>
 
                 {/* Create Quiz */}
@@ -32,6 +48,7 @@ const Admin = () => {
                     <div>
                         Create Quiz
                     </div>
+
                 </div>
             </div>
             

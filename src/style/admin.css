@@ -47,3 +47,14 @@
 input:focus {
     outline: none;
 }
+
+#submit-link {
+    display: flex;
+    background-color: cadetblue;
+    height: 10%;
+    padding: 1em;
+}
+
+#submit-link input {
+    height: 60%;
+}
