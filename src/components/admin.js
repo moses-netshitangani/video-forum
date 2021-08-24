@@ -1,8 +1,13 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import ReactPlayer from 'react-player';
 import '../style/admin.css';
 
-const Admin = () => {
+function Admin () {
+
+    useEffect (() => {
+        console.log("Just refreshed");
+        console.log(`list is ${quizList}`);
+    });
 
     // ref to access the ReactPlayer
     const player = useRef(null);
@@ -12,40 +17,62 @@ const Admin = () => {
 
     // states for quiz
     const [link, setLink] = useState('');
-    const [ques, setQues] = useState('');
-    const [optA, setOptA] = useState('');
-    const [optB, setOptB] = useState('');
-    const [optC, setOptC] = useState('');
-    const [optD, setOptD] = useState('');
-    const [corr, setCorr] = useState('');
-    const [time, setTime] = useState('');
 
-    
-
-    // methods encapsulating state change
-    let changeLink = e => setLink(e.target.value);
-    let changeQues = e => setQues(e.target.value);
-    let changeOA = e => setOptA(e.target.value);
-    let changeOB = e => setOptB(e.target.value);
-    let changeOC = e => setOptC(e.target.value);
-    let changeOD = e => setOptD(e.target.value);
-    let changeOCorr = e => setCorr(e.target.value);
-    let changeTime = e => setTime(e.target.value);
-
+    // stores quizzes
+    let quizList = [];    
 
     // quiz structure
-    let quizTemp = {
-        link: link,
-        question: ques,
-        optA: optA,
-        optB: optB,
-        optC: optC,
-        optD: optD,
-        correct: corr,
-        time: time
+    // let quizTemp = {};
+    //     question: ques,
+    //     optA: optA,
+    //     optB: optB,
+    //     optC: optC,
+    //     optD: optD,
+    //     correct: corr,
+    //     time: time
+    // }
+
+    // extract all quiz values
+    const extractValues = () => {
+        let q = document.getElementById("ques").value;
+        let oa = document.getElementById("oa").value;
+        let ob = document.getElementById("ob").value;
+        let oc = document.getElementById("oc").value;
+        let od = document.getElementById("od").value;
+        let co = document.getElementById("co").value;
+        let t = document.getElementById("t").value;
+
+        let quizTemp = {
+            question: q,
+            optA: oa,
+            optB: ob,
+            optC: oc,
+            optD: od,
+            correct: co,
+            time: t
+        }
+
+        quizList.push(quizTemp);
+        console.log(quizList);
     }
+
+
+    // add quiz to list
     const createQuiz = () => {
-        console.log(quizTemp);
+        // add quiz to list
+        console.log(`list before: ${quizList}`);
+        // quizList.push(quizTemp);
+        console.log(`list after: ${quizList}`);
+    }
+
+    // create lesson
+    const createLesson = () => {
+        let lesson = {
+            link: link,
+            quizzes: quizList
+        }
+
+        console.log(lesson);
     }
 
     const getLink = () => {
@@ -57,38 +84,44 @@ const Admin = () => {
             <h3>Administrator Page</h3>
             
             <div className='admin-cover'>
-                {/* Lecture Video */}
-                <div className='create-video'>
 
-                    <div id='submit-link'>
-                        <input type='text' id='link' onChange={e => setLink(e.target.value)}
-                        placeholder='Lecture video YouTube link'/>
-                        <div onClick={getLink} className='button-cover c'>Link Video</div>
+                <div className='create-content'>
+                    {/* Lecture Video */}
+                    <div className='create-video'>
+
+                        <div id='submit-link'>
+                            <input type='text' id='link' onChange={e => setLink(e.target.value)}
+                            placeholder='Lecture video YouTube link'/>
+                            <div onClick={getLink} className='button-cover c'>Link Video</div>
+                        </div>
+
+                        <ReactPlayer controls ref={player} width="95%"
+                        height="75%" style={{margin: '0 auto'}} url={url} />
+
                     </div>
 
-                    <ReactPlayer controls ref={player} width="95%"
-                     height="75%" style={{margin: '0 auto'}} url={url} />
+                    {/* Create Quiz */}
+                    <div className="create-cover">
 
+                        <div className='quiz-template'>
+                            <input type='text' placeholder='Type in quiz question' id='ques' />
+                            <input id="oa" type='text' placeholder='Option A' />
+                            <input id="ob" type='text' placeholder='Option B' />
+                            <input id="oc" type='text' placeholder='Option C' />
+                            <input id="od" type='text' placeholder='Option D' />
+                            <input id="co" type='text' placeholder='Correct Option' />
+                            <input type='text' placeholder='Time in [mm:ss] format' id='t' />
+                        </div>
+                        
+                        <div className="button-cover c" onClick={extractValues}>
+                            Add Quiz
+                        </div>
+
+                    </div>
                 </div>
 
-                {/* Create Quiz */}
-                <div className="create-cover">
-
-                    <form className='quiz-template'>
-                        <input type='text' placeholder='Type in quiz question' 
-                        onChange={e => {setQues(e.target.value)}} id='q' />
-                        <input type='text' placeholder='Option A' onChange={e => {setOptA(e.target.value)}}/>
-                        <input type='text' placeholder='Option B' onChange={e => {setOptB(e.target.value)}}/>
-                        <input type='text' placeholder='Option C' onChange={e => {setOptC(e.target.value)}}/>
-                        <input type='text' placeholder='Option D' onChange={e => {setOptD(e.target.value)}}/>
-                        <input type='text' placeholder='Correct Option' onChange={e => {setCorr(e.target.value)}}/>
-                        <input type='text' placeholder='Time in [mm:ss] format' id='t' onChange={e => {setTime(e.target.value)}} />
-                    </form>
-                    
-                    <div className="button-cover c" onClick={createQuiz}>
-                        Create Quiz
-                    </div>
-
+                <div className="button-cover d" onClick={createLesson}>
+                    Submit Lesson
                 </div>
                 
             </div>

@@ -71,8 +71,8 @@ const Video = () => {
             <ReactPlayer ref={b} className="player" controls
             width="100%" height="100%" style={{margin: '0 auto'}}
             onProgress={e => {oP(e)}} playing={play} loop
-            // url="https://www.youtube.com/watch?v=O6P86uwfdR0" />
-            url="https://www.youtube.com/watch?v=lIlMtVGI5Pg" />
+            url="https://www.youtube.com/watch?v=O6P86uwfdR0" />
+             {/* url="https://www.youtube.com/watch?v=lIlMtVGI5Pg" /> */}
 
             {/* <CopyToClipboard text={timeString} onCopy={e => alert(e)}> */}
                 <Button onClick={getElapsed} />
