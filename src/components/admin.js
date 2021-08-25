@@ -1,13 +1,9 @@
 import React, {useState, useRef, useEffect} from 'react';
+import axios from 'axios';
 import ReactPlayer from 'react-player';
 import '../style/admin.css';
 
 function Admin () {
-
-    useEffect (() => {
-        console.log("Just refreshed");
-        console.log(`list is ${quizList}`);
-    });
 
     // ref to access the ReactPlayer
     const player = useRef(null);
@@ -21,16 +17,6 @@ function Admin () {
     // stores quizzes
     let quizList = [];    
 
-    // quiz structure
-    // let quizTemp = {};
-    //     question: ques,
-    //     optA: optA,
-    //     optB: optB,
-    //     optC: optC,
-    //     optD: optD,
-    //     correct: corr,
-    //     time: time
-    // }
 
     // extract all quiz values
     const extractValues = () => {
@@ -56,15 +42,6 @@ function Admin () {
         console.log(quizList);
     }
 
-
-    // add quiz to list
-    const createQuiz = () => {
-        // add quiz to list
-        console.log(`list before: ${quizList}`);
-        // quizList.push(quizTemp);
-        console.log(`list after: ${quizList}`);
-    }
-
     // create lesson
     const createLesson = () => {
         let lesson = {
@@ -72,7 +49,13 @@ function Admin () {
             quizzes: quizList
         }
 
-        console.log(lesson);
+        axios.post("http://localhost:3000/setup/add", lesson)
+        .then(res => {
+            console.log(res);
+        })
+        .catch(err => {
+            console.log(err);
+        });
     }
 
     const getLink = () => {
