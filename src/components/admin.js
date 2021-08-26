@@ -49,7 +49,7 @@ function Admin () {
             quizzes: quizList
         }
 
-        axios.post("http://localhost:3000/setup/add", lesson)
+        axios.post("http://localhost:3001/setup/add", lesson)
         .then(res => {
             console.log(res);
         })

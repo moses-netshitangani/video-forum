@@ -12,16 +12,16 @@ const VideoForum = () => {
     let [quiz, onQuiz] = useState([]);
 
     // fetch lecture video and quiz data
-    // useEffect(() => {
-    //     axios.get("http://localhost:3001/setup")
-    //     .then(res => {
-    //         onLink(res.data[0].link);
-    //         onId(res.data[0]._id);
-    //         onQuiz(res.data[0].quizzes);
-    //     })
-    //     .catch(err => console.log(err));
+    useEffect(() => {
+        axios.get("http://localhost:3001/setup")
+        .then(res => {
+            onLink(res.data[0].link);
+            onId(res.data[0]._id);
+            onQuiz(res.data[0].quizzes);
+        })
+        .catch(err => console.log(err));
 
-    // })
+    })
 
     // forum and quiz display variables
     let [cforum, changeCforum] = useState("show");

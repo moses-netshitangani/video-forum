@@ -22,7 +22,7 @@ router.route('/add').post(async (req, res) => {
 
 // retrieve quiz
 router.route('/').get((req, res) => {
-    Quiz.find()
+    Quiz.find().sort({createdAt: -1})
         .then(quiz => res.json(quiz))
         .catch(err => res.status(400).json("Error tryna get admin") + err);
 })
