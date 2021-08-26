@@ -8,11 +8,35 @@ const Quiz = props => {
     const [lock, onLock] = useState('false');
 
     // quiz logic
-    const quizComp = {
-        question: 'What is a variable?',
-        options: ['Option A', 'Option B', 'Option C', 'Option D'],
-        correct: 'Option B'
+    let quizComp = {
+        question: '',
+        options: ['', '', '', ''],
+        correct: ''
     }
+
+    // yah neh
+    const [ques, onQues] = useState("");
+    const [optA, onA] = useState("");
+    const [optB, onB] = useState("");
+    const [optC, onC] = useState("");
+    const [optD, onD] = useState("");
+    const [corr, onCorr] = useState("");
+
+    useEffect(() => {
+
+        if(props.quiz.length !== 0)
+        {
+            console.log(props.quiz)
+            onQues(props.quiz[0].question);
+            onA(props.quiz[0].optA);
+            onB(props.quiz[0].optB);
+            onC(props.quiz[0].optC);
+            onD(props.quiz[0].optD);
+            onCorr(props.quiz[0].correct)
+        }
+        
+        // need to extract quiz time as well
+    });
 
     const checkAnswer = num => {
 
@@ -48,7 +72,7 @@ const Quiz = props => {
 
             {/* question */}
             <div className="question">
-                <h4>{quizComp.question}</h4>
+                <h4>{ques}</h4>
             </div>
 
             {/* options */}
@@ -56,28 +80,28 @@ const Quiz = props => {
                 <div className={`option-img`} >
                     <div className='false' id='1'></div>
                 </div>
-                <p className="text">{quizComp.options[0]}</p>
+                <p className="text">{optA}</p>
             </div>
 
             <div className="option" onClick={() => {checkAnswer(2)}}>
                 <div className={`option-img`} >
                     <div className='false' id='2'></div>
                 </div>
-                <p className="text">{quizComp.options[1]}</p>
+                <p className="text">{optB}</p>
             </div>
 
             <div className="option" onClick={() => {checkAnswer(3)}}>
                  <div className={`option-img`} >
                     <div className='false' id='3'></div>
                 </div>
-                <p className="text">{quizComp.options[2]}</p>
+                <p className="text">{optC}</p>
             </div>
 
             <div className="option" onClick={() => {checkAnswer(4)}}>
                 <div className={`option-img`} >
                     <div className='false' id='4'></div>
                 </div>
-                <p className="text">{quizComp.options[3]}</p>
+                <p className="text">{optD}</p>
             </div>
 
             <div className="submit-btn" onClick={() => {submitAns()}}>

@@ -1,10 +1,10 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ReactPlayer from 'react-player';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import Button from './button';
 import "../style/video.css";
 
-const Video = () => {
+const Video = props => {
 
     // time elapsed
     let time = 0;
@@ -25,8 +25,8 @@ const Video = () => {
     let oP = e => {
         if(Math.floor(e.playedSeconds) >= 7)
         {
-            // onPlayChange(false);
-            // seekBack()
+            onPlayChange(false);
+            seekBack()
         }
         else
         {
@@ -70,9 +70,10 @@ const Video = () => {
         <div className="video-cover">
             <ReactPlayer ref={b} className="player" controls
             width="100%" height="100%" style={{margin: '0 auto'}}
-            onProgress={e => {oP(e)}} playing={play} loop
-            url="https://www.youtube.com/watch?v=O6P86uwfdR0" />
-             {/* url="https://www.youtube.com/watch?v=lIlMtVGI5Pg" /> */}
+            onProgress={e => {oP(e)}}
+            // onProgress={e => {oP(e)}} playing={play} loop
+            url={props.link} />
+            {/* //  url="https://www.youtube.com/watch?v=lIlMtVGI5Pg" /> */}
 
             {/* <CopyToClipboard text={timeString} onCopy={e => alert(e)}> */}
                 <Button onClick={getElapsed} />
