@@ -4,23 +4,15 @@ import "../style/quiz.css";
 const Quiz = props => {
 
     // quiz answer
-    let selectedAns = '';
     const [lock, onLock] = useState('false');
 
-    // quiz logic
-    let quizComp = {
-        question: '',
-        options: ['', '', '', ''],
-        correct: ''
-    }
-
-    // yah neh
+    // question and answers
     const [ques, onQues] = useState("");
     const [optA, onA] = useState("");
     const [optB, onB] = useState("");
     const [optC, onC] = useState("");
     const [optD, onD] = useState("");
-    const [corr, onCorr] = useState("");
+    const [selectedAns, onSelect] = useState("");
 
     useEffect(() => {
 
@@ -32,7 +24,6 @@ const Quiz = props => {
             onB(props.quiz[0].optB);
             onC(props.quiz[0].optC);
             onD(props.quiz[0].optD);
-            onCorr(props.quiz[0].correct)
         }
         
         // need to extract quiz time as well
@@ -45,7 +36,21 @@ const Quiz = props => {
             if(i === num)
             {
                 document.getElementById(`${num}`).className = 'selected';
-                selectedAns = quizComp.options[num - 1];
+                
+                switch(num) {
+                    case 1:
+                        onSelect(optA);
+                        break;
+                    case 2:
+                        onSelect(optB);
+                        break;
+                    case 3:
+                        onSelect(optC);
+                        break;
+                    case 4:
+                        onSelect(optD);
+                        break;
+                }
             }
             else
             {
