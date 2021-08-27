@@ -9,7 +9,7 @@ const VideoForum = () => {
     // video and quiz stores
     const [link, onLink] = useState("");
     const [id, onId] = useState("");
-    let [quiz, onQuiz] = useState([]);
+    const [quiz, onQuiz] = useState([]);
 
     // fetch lecture video and quiz data
     useEffect(() => {
@@ -55,8 +55,8 @@ const VideoForum = () => {
             </div>
 
             <div className="video-forum">
-                <Video link={link} />
-                <Forum cforum={cforum} />
+                <Video link={link} foc={swap}/>
+                <Forum id={id} cforum={cforum} />
                 <Quiz quiz={quiz} cquiz={cquiz} />
             </div>
 

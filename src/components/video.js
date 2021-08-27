@@ -26,7 +26,8 @@ const Video = props => {
         if(Math.floor(e.playedSeconds) >= 7)
         {
             onPlayChange(false);
-            seekBack()
+            seekBack();
+            props.foc('q');
         }
         else
         {
