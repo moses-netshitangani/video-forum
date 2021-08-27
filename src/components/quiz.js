@@ -15,19 +15,23 @@ const Quiz = props => {
     const [selectedAns, onSelect] = useState("");
 
     useEffect(() => {
-
         if(props.quiz.length !== 0)
         {
-            console.log(props.quiz)
-            onQues(props.quiz[0].question);
-            onA(props.quiz[0].optA);
-            onB(props.quiz[0].optB);
-            onC(props.quiz[0].optC);
-            onD(props.quiz[0].optD);
+            console.log(props.quiz);
+            onQues(props.quiz.question);
+            onA(props.quiz.optA);
+            onB(props.quiz.optB);
+            onC(props.quiz.optC);
+            onD(props.quiz.optD);
         }
         
         // need to extract quiz time as well
     });
+
+    // loads next quiz
+    // const nextQuiz = () => {
+
+    // }
 
     const checkAnswer = num => {
 
@@ -64,6 +68,7 @@ const Quiz = props => {
         {
             onLock('lock');
             alert(selectedAns);
+            props.onDone("yes");
         }
         else
             alert("Choose a single option");

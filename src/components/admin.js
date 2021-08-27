@@ -40,6 +40,7 @@ function Admin () {
 
         quizList.push(quizTemp);
         console.log(quizList);
+        alert(`Quiz #${quizList.length} added!`);
     }
 
     // create lesson
@@ -52,6 +53,7 @@ function Admin () {
         axios.post("http://localhost:3001/setup/add", lesson)
         .then(res => {
             console.log(res);
+            alert("Lesson submitted!");
         })
         .catch(err => {
             console.log(err);
