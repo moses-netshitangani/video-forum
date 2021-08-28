@@ -15,6 +15,11 @@ const VideoForum = () => {
     const [time, onTime] = useState("");
     const [lock, onLock] = useState('true');
 
+    // forum and quiz display variables
+    let [cforum, changeCforum] = useState("show");
+    let [cquiz, changeCquiz] = useState("hide");
+    const [heading, changeHeading] = useState('Lecture-Video Forum Component');
+
     // fetch lecture video and quiz data
     useEffect(() => {
 
@@ -27,39 +32,31 @@ const VideoForum = () => {
                 onList(res.data[0].quizzes);
                 onQuiz(res.data[0].quizzes[0]);
                 onTime(res.data[0].quizzes[0].time);
-                // console.log(res.data[0].quizzes[0]);
             })
             .catch(err => console.log(err));
         }
         
-        if(quizDone === "yes" && quizList.length > 1)
+        // send next quiz, if available
+        if(quizDone === "yes")
         {
-            quizList.shift();
-            onList(quizList);
-            onQuiz(quizList[0]);
-            onTime(quizList[0].time);
-            onDone("no");
+            if(quizList.length > 1)
+            {
+                quizList.shift();
+                onList(quizList);
+                onQuiz(quizList[0]);
+                onTime(quizList[0].time);
+                onDone("no");
+            }
+            else
+            {
+                // send quiz time to random larger number
+                onTime("90:55");
+            }
+
+           
+            
         }
-
-        
-
     })
-
-    // send quizzes sequentially
-    const sendQuiz = () => {
-        if(quizDone === "yes" && quizList.length > 0)
-        {
-            quizList.shift();
-            onList(quizList);
-            onQuiz(quizList[0]);
-            onDone("no");
-        }
-    }
-
-    // forum and quiz display variables
-    let [cforum, changeCforum] = useState("show");
-    let [cquiz, changeCquiz] = useState("hide");
-    const [heading, changeHeading] = useState('Lecture-Video Forum Component');
 
     let swap = e => {
         if(e === 'q')

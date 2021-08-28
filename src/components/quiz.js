@@ -78,7 +78,6 @@ const Quiz = props => {
 
             {/* invisible page for locking quiz */}
             <div className={props.lock}></div>
-            {`${props.lock}`}
 
             {/* question */}
             <div className="question">
