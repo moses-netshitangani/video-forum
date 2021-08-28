@@ -13,10 +13,11 @@ const VideoForum = () => {
     const [quiz, onQuiz] = useState({});
     const [quizDone, onDone] = useState("no");
     const [time, onTime] = useState("");
+    const [lock, onLock] = useState('true');
 
     // fetch lecture video and quiz data
     useEffect(() => {
-        console.log(time);
+
         if(link === "")
         {
             axios.get("http://localhost:3001/setup")
@@ -31,7 +32,7 @@ const VideoForum = () => {
             .catch(err => console.log(err));
         }
         
-        if(quizDone === "yes" && quizList.length > 0)
+        if(quizDone === "yes" && quizList.length > 1)
         {
             quizList.shift();
             onList(quizList);
@@ -86,9 +87,9 @@ const VideoForum = () => {
             </div>
 
             <div className="video-forum">
-                <Video time={time} link={link} foc={swap}/>
+                <Video onLock={onLock} time={time} done={quizDone} link={link} foc={swap}/>
                 <Forum id={id} cforum={cforum} />
-                <Quiz quiz={quiz} onDone={onDone} cquiz={cquiz} />
+                <Quiz lock={lock} onLock={onLock} quiz={quiz} onDone={onDone} cquiz={cquiz} />
             </div>
 
         </div>

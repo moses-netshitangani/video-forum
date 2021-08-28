@@ -14,6 +14,14 @@ const Video = props => {
     // ref to access the ReactPlayer
     const b = useRef(null);
 
+    // to control when to pause and take quiz
+    const [play, onPlayChange] = useState(false);
+
+    useEffect(() => {
+        if(props.done === "yes")
+            onPlayChange(true);
+    })
+
     // seek back to quiz
     const seekBack = () => {
         b.current.seekTo(secnds, 'seconds');
@@ -32,9 +40,7 @@ const Video = props => {
         secnds = secs;
     }
 
-    // for quiz component
-    // to control when to pause and take quiz
-    const [play, onPlayChange] = useState(false);
+    
 
     let oP = e => {
         rawSec(`[${props.time}]`);
@@ -43,9 +49,11 @@ const Video = props => {
             onPlayChange(false);
             seekBack();
             props.foc('q');
+            props.onLock('false');
         }
         else
         {
+            props.onLock('lock');
             if(e.playedSeconds >= 1)
                 onPlayChange(true);
         }

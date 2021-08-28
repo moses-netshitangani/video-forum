@@ -95,7 +95,7 @@ function Admin () {
                             <input id="oc" type='text' placeholder='Option C' />
                             <input id="od" type='text' placeholder='Option D' />
                             <input id="co" type='text' placeholder='Correct Option' />
-                            <input type='text' placeholder='Time in [mm:ss] format' id='t' />
+                            <input type='text' placeholder='Time in mm:ss format' id='t' />
                         </div>
                         
                         <div className="button-cover c" onClick={extractValues}>

@@ -4,7 +4,7 @@ import "../style/quiz.css";
 const Quiz = props => {
 
     // quiz answer
-    const [lock, onLock] = useState('false');
+    // const [lock, onLock] = useState('false');
 
     // question and answers
     const [ques, onQues] = useState("");
@@ -17,7 +17,6 @@ const Quiz = props => {
     useEffect(() => {
         if(props.quiz.length !== 0)
         {
-            console.log(props.quiz);
             onQues(props.quiz.question);
             onA(props.quiz.optA);
             onB(props.quiz.optB);
@@ -66,9 +65,10 @@ const Quiz = props => {
     const submitAns = () => {
         if(selectedAns !== '')
         {
-            onLock('lock');
+            // onLock('lock');
             alert(selectedAns);
             props.onDone("yes");
+            props.onLock('lock');
         }
         else
             alert("Choose a single option");
@@ -78,7 +78,8 @@ const Quiz = props => {
         <div className={`quiz-cover ${props.cquiz}`}>
 
             {/* invisible page for locking quiz */}
-            <div className={lock}></div>
+            <div className={props.lock}></div>
+            {`${props.lock}`}
 
             {/* question */}
             <div className="question">
