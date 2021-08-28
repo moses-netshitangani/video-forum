@@ -3,9 +3,6 @@ import "../style/quiz.css";
 
 const Quiz = props => {
 
-    // quiz answer
-    // const [lock, onLock] = useState('false');
-
     // question and answers
     const [ques, onQues] = useState("");
     const [optA, onA] = useState("");
@@ -23,15 +20,9 @@ const Quiz = props => {
             onC(props.quiz.optC);
             onD(props.quiz.optD);
         }
-        
-        // need to extract quiz time as well
     });
 
-    // loads next quiz
-    // const nextQuiz = () => {
-
-    // }
-
+    // highlights the selected quiz option
     const checkAnswer = num => {
 
         for(let i = 1; i < 5; i++)
@@ -62,6 +53,13 @@ const Quiz = props => {
         }
     }
 
+    // resets all options, so that none is selected
+    const resetOptions = () => {
+        for(let i = 1; i < 5; i++)
+            document.getElementById(`${i}`).className = 'false';
+    }
+
+    // records highlighted answer
     const submitAns = () => {
         if(selectedAns !== '')
         {
@@ -69,6 +67,7 @@ const Quiz = props => {
             alert(selectedAns);
             props.onDone("yes");
             props.onLock('lock');
+            resetOptions();
         }
         else
             alert("Choose a single option");
