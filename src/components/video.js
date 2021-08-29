@@ -8,9 +8,7 @@ const Video = props => {
 
     // time elapsed
     let time = 0;
-    // let timeString = "";
     let secnds = 0;
-
     const [timeString, onTimeString] = useState("");
 
     // ref to access the ReactPlayer
@@ -18,6 +16,9 @@ const Video = props => {
 
     // to control when to pause and take quiz
     const [play, onPlayChange] = useState(false);
+
+    // timestamp pop up display
+    const [pop, OnPop] = useState("hide");
 
     useEffect(() => {
         if(props.done === "yes")
@@ -86,7 +87,6 @@ const Video = props => {
         }
 
         // time
-        // timeString = `[${mins}:${secs}]`;
         onTimeString(`[${mins}:${secs}]`);
     }
 
@@ -94,24 +94,35 @@ const Video = props => {
     const getElapsed = () => {
         time = b.current.getCurrentTime();
         processTime(time);
-        // alert(timeString);
+    }
+
+    // display time stamp on successful copy
+    const popUp = () => {
+        OnPop("stamp");
+        setTimeout(function () {
+            OnPop("hide");
+        }, 3000);
+        
     }
 
     return(
         <div className="video-cover">
+            {/* video player */}
             <ReactPlayer ref={b} className="player" controls
             width="100%" height="100%" style={{margin: '0 auto'}}
             onProgress={e => {oP(e)}} playing={play}
-            // {/*onProgress={e => {oP(e)}} playing={play} loop */}
             url={props.link} />
 
-            <CopyToClipboard text={timeString} onCopy={(tex, res) => {
-                // alert(timeString);
-                alert(tex);
-            }}>
+            {/* timestamp button */}
+            <CopyToClipboard text={timeString} onCopy={popUp}>
                 <Button />
-                {/* <Button onClick={getElapsed} /> */}
             </CopyToClipboard>
+
+            {/* timestamp popup */}
+            <div className={pop}>
+                <p><b>Time-stamp copied to clipboard.</b></p>
+                <p><b>Use Ctrl + V to paste when on the forum.</b></p>
+            </div>
         </div>
 
     );

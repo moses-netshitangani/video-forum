@@ -5,3 +5,45 @@
     border-radius: 0.9em;
     padding: 0.5em;
 }
+
+.stamp {
+    background-color: rgba(43, 122, 226, 0.082);
+    color: rgba(61, 121, 250, 0.651);
+    border-radius: 0.75em;
+    position: absolute;
+    height: 5em;
+    width: 16em;
+    bottom: 0;
+    left: 50%;
+    margin-left: -8em;
+    border: 3px solid rgba(61, 121, 250, 0.568);
+    animation: pop-up;
+    animation-duration: 3s;
+}
+
+.stamp p {
+    font-size: small;
+}
+
+.hide {
+    display: none;
+}
+
+/* pop up animation */
+@keyframes pop-up {
+    0%{
+      bottom: 0%;
+      transform: scale(0.75);
+      background-color: rgba(43, 122, 226, 0.082);
+    }
+    50%{
+        bottom: 50%;
+        transform: scale(1.5);
+        background-color: white;
+    }
+    100%{
+      bottom: 50%;
+      background-color: white;
+      transform: scale(1.5);
+    }
+  }
