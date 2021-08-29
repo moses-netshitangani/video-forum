@@ -20,6 +20,9 @@ const Video = props => {
     // timestamp pop up display
     const [pop, OnPop] = useState("hide");
 
+    // locks time stamp button
+    const [bLock, onbLock] = useState("hide");
+
     useEffect(() => {
         if(props.done === "yes")
             onPlayChange(true);
@@ -96,11 +99,14 @@ const Video = props => {
         processTime(time);
     }
 
-    // display time stamp on successful copy
+    // display pop up for 3s
     const popUp = () => {
+        onbLock("button-lock");
         OnPop("stamp");
-        setTimeout(function () {
+        setTimeout(function ()
+        {
             OnPop("hide");
+            onbLock("hide");
         }, 3000);
         
     }
@@ -115,7 +121,7 @@ const Video = props => {
 
             {/* timestamp button */}
             <CopyToClipboard text={timeString} onCopy={popUp}>
-                <Button />
+                <Button bLock={bLock}/>
             </CopyToClipboard>
 
             {/* timestamp popup */}
