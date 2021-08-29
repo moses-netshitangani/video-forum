@@ -8,8 +8,10 @@ const Video = props => {
 
     // time elapsed
     let time = 0;
-    let timeString = "";
+    // let timeString = "";
     let secnds = 0;
+
+    const [timeString, onTimeString] = useState("");
 
     // ref to access the ReactPlayer
     const b = useRef(null);
@@ -20,7 +22,7 @@ const Video = props => {
     useEffect(() => {
         if(props.done === "yes")
             onPlayChange(true);
-    })
+    });
 
     // seek back to quiz
     const seekBack = () => {
@@ -43,6 +45,10 @@ const Video = props => {
     
 
     let oP = e => {
+        // update time string - updates time stamp
+        getElapsed();
+
+        // convert quiz time to seconds and then compare
         rawSec(`[${props.time}]`);
         if(Math.floor(e.playedSeconds) >= secnds)
         {
@@ -80,14 +86,15 @@ const Video = props => {
         }
 
         // time
-        timeString = `[${mins}:${secs}]`;
+        // timeString = `[${mins}:${secs}]`;
+        onTimeString(`[${mins}:${secs}]`);
     }
 
     // get time elapsed
     const getElapsed = () => {
         time = b.current.getCurrentTime();
         processTime(time);
-        alert(timeString);
+        // alert(timeString);
     }
 
     return(
@@ -98,9 +105,13 @@ const Video = props => {
             // {/*onProgress={e => {oP(e)}} playing={play} loop */}
             url={props.link} />
 
-            {/* <CopyToClipboard text={timeString} onCopy={e => alert(e)}> */}
-                <Button onClick={getElapsed} />
-            {/* </CopyToClipboard> */}
+            <CopyToClipboard text={timeString} onCopy={(tex, res) => {
+                // alert(timeString);
+                alert(tex);
+            }}>
+                <Button />
+                {/* <Button onClick={getElapsed} /> */}
+            </CopyToClipboard>
         </div>
 
     );
