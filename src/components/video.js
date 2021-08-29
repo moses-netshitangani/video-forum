@@ -101,11 +101,16 @@ const Video = props => {
 
     // display pop up for 3s
     const popUp = () => {
+        // show pop up and lock button
         onbLock("button-lock");
         OnPop("stamp");
+
         setTimeout(function ()
         {
+            // hide popup
             OnPop("hide");
+
+            // unlock time stamp button
             onbLock("hide");
         }, 3000);
         

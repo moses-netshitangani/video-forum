@@ -3,8 +3,6 @@ import '../style/button.css';
 
 const Button = props => {
     
-    // locks the button
-    
     return(
         <div className='button-outer'>
             <div className="button-cover" onClick={props.onClick}>
