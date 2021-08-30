@@ -4,7 +4,7 @@
     width: 100%;
     height: 100%;
     border-radius: 0.5em;
-    box-shadow: 0 0.188em 1.550em -0.525em rgb(73, 71, 71);
+    box-shadow: 0 0.188em 1.550em -0.525em rgb(65, 63, 63);
     transition: transform 0.5s;
 }
 
