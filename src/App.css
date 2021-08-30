@@ -93,3 +93,35 @@
 .frm {
   right: 8.75%;
 }
+
+.sta-cover {
+  background-color: #61dafb;
+}
+
+.toggle {
+  position: absolute;
+  top: 1.5em;
+  left: 2.5em;
+  width: 6em;
+  height: 2em;
+  border-radius: 0.75em;
+  background-color: #3473f1c0;
+  display: flex;
+  flex-direction: column;
+}
+
+.toggle div {
+  border: 1px solid grey;
+  /* display: none; */
+  margin: 0 auto;
+  width: 90%;
+  height: 98%;
+  box-sizing: border-box;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+.toggle div:first-of-type {
+  display: initial;
+}

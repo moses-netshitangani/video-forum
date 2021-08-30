@@ -4,10 +4,46 @@ import '../style/stats.css';
 
 const Stats = props => {
 
-    return(
-        <div className={`stats-cover`}>
+    // data to be displayed
+    // const [dis, OnDis] = useState([]);
 
-            <h2>Quiz Statistics</h2>
+    // show quiz 1 data on load
+    useEffect(() => {
+        console.log("hey");
+    });
+
+    // switch between quiz data
+    // const switchData = e => {
+    //     if(e === "next")
+    //     {
+    //         // move forward
+    //     }else
+    //     {
+    //         // move backwards
+    //     }
+    // }
+
+    return(
+        <div className="stats-cover">
+
+            <div className="legend">
+                <div className="legend-bar">
+                    <div style={{backgroundColor: props.stats[0].color}}></div>
+                    <p>{props.stats[0].title}</p>
+                </div>
+                <div className="legend-bar">
+                    <div style={{backgroundColor: props.stats[1].color}}></div>
+                    <p>{props.stats[1].title}</p>
+                </div>
+                <div className="legend-bar">
+                    <div style={{backgroundColor: props.stats[2].color}}></div>
+                    <p>{props.stats[2].title}</p>
+                </div>
+                <div className="legend-bar">
+                    <div style={{backgroundColor: props.stats[3].color}}></div>
+                    <p>{props.stats[3].title}</p>
+                </div>
+            </div>
 
             <div className="chart">
                 <PieChart

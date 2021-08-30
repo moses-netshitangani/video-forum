@@ -5,8 +5,10 @@ import Admin from './components/admin';
 import './App.css';
 
 function App() {
+
   return (
     <div className="App">
+      
       <Router>
         <div style={{minHeight: '50em'}}>
             <Switch>

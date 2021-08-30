@@ -72,8 +72,6 @@ function Admin () {
 
     return (
         <div>
-            <h3>Administrator Page</h3>
-            
             <div className='admin-cover'>
 
                 <div className='create-content'>

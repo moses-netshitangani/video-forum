@@ -4,8 +4,9 @@ import Forum from './forum';
 import Video from './video';
 import Quiz from './quiz';
 import Stats from './stats';
+import Admin from './admin';
 
-const VideoForum = () => {
+const VideoForum = props => {
 
     // video, quiz and stats stores
     const [link, onLink] = useState("");
@@ -21,6 +22,11 @@ const VideoForum = () => {
     let [cforum, changeCforum] = useState("show");
     let [cquiz, changeCquiz] = useState("hide");
     const [heading, changeHeading] = useState('Lecture-Video Forum Component');
+
+    // toggling other tabs
+    const [lesson, onLesson] = useState("flex");
+    const [statShow, onStatShow] = useState("hide");
+    const [adminShow, onAdminShow] = useState("hide");
 
     // fetch lecture video and quiz data
     useEffect(() => {
@@ -53,50 +59,178 @@ const VideoForum = () => {
             }
             else
             {
-                // send quiz time to random larger number
+                // set quiz time to random large number
                 onTime("90:55");
             }
-
-           
-            
         }
     })
 
+    // toggles forum or quiz
     let swap = e => {
-        if(e === 'q')
+        if(lesson === "flex")
         {
-            changeCforum("hide");
-            changeCquiz("show");    
-            changeHeading("Mandatory Quiz Component");
+            if(e === 'q')
+            {
+                changeCforum("hide");
+                changeCquiz("show");    
+                changeHeading("Mandatory Quiz Component");
+            }else
+            {
+                changeCforum("show");
+                changeCquiz("hide");
+                changeHeading("Lecture-Video Forum Component");
+            }
         }else
         {
-            changeCforum("show");
-            changeCquiz("hide");
-            changeHeading("Lecture-Video Forum Component");
+            if(e === "stats")
+                changeHeading("Quiz Statistics");
+            else
+                changeHeading("Administrator");
         }
     }
 
-    return(
+    // toggles lesson, stats, admin
+    const toggleView = e => {
+        if(e === "lesson")
+        {
+            onLesson("flex");
+            onStatShow("hide");
+            onAdminShow("hide");
+        }
+        else if(e === "stats")
+        {
 
-        <div>
-            <div className='switch-tab'onClick={() => {swap('q')}}>Quiz</div>
-            <div className='switch-tab frm'onClick={() => {swap('f')}}>Forum</div>
+            onLesson("hide");
+            onStatShow("flex");
+            onAdminShow("hide");
+
+        }
+        else
+        {
+            onLesson("hide");
+            onStatShow("hide");
+            onAdminShow("initial");
+        }
+    }
+
+
+    if(lesson === "flex")
+    {
+        return (
+            // landing page 
             <div>
-                <h2 style={{margin: '1em 0 2em 0'}}>
-                    {heading}
-                </h2>
+                 <div className="toggle">
+                 <div onClick={() => {toggleView("lesson")}}>Lesson</div>
+                 <div onClick={() => {toggleView("stats")}}>Stats</div>
+                 <div onClick={() => {toggleView("admin")}}>Admin</div>
+                </div>
+
+                <div>
+                    <h2 style={{margin: '1em 0 2em 0'}}>
+                        {heading}
+                    </h2>
+                </div>
+
+                <div className={`${lesson}`}>
+                    {/* switch between quiz and forum */}
+                    <div className={`switch-tab`} onClick={() => {swap('q')}}>Quiz</div>
+                    <div className={`switch-tab frm`} onClick={() => {swap('f')}}>Forum</div>
+
+                    <div className="video-forum">
+                        <Video onLock={onLock} time={time} done={quizDone} link={link} foc={swap}/>
+                        <Forum id={id} cforum={cforum} />
+                        <Quiz lock={lock} onLock={onLock} quiz={quiz} onDone={onDone} cquiz={cquiz} />
+                    </div>
+                </div>
             </div>
+        );
+    }
+    else if(statShow === "flex")
+    {
+        return (
+            <div>
+                <div className="toggle">
+                    <div onClick={() => {toggleView("lesson")}}>Lesson</div>
+                    <div onClick={() => {toggleView("stats")}}>Stats</div>
+                    <div onClick={() => {toggleView("admin")}}>Admin</div>
+                </div>
 
-            <div className="video-forum">
-                <Video onLock={onLock} time={time} done={quizDone} link={link} foc={swap}/>
-                <Forum id={id} cforum={cforum} />
-                <Quiz lock={lock} onLock={onLock} quiz={quiz} onDone={onDone} cquiz={cquiz} />
-                <Stats stats={stats} />
+                <div>
+                    <h2 style={{margin: '1em 0 2em 0'}}>
+                        {"Quiz Statistics"}
+                    </h2>
+                </div>
+
+                <div className={statShow}>
+                    <Stats stats={stats} />
+                </div>
             </div>
+        );
+    }
+    else
+    {
+        return (
+           <div>
+                <div className="toggle">
+                 <div onClick={() => {toggleView("lesson")}}>Lesson</div>
+                 <div onClick={() => {toggleView("stats")}}>Stats</div>
+                 <div onClick={() => {toggleView("admin")}}>Admin</div>
+                </div>
 
-        </div>
+                <div>
+                    <h2 style={{margin: '1em 0 2em 0'}}>
+                        {"Administrator"}
+                    </h2>
+                </div>
+                <div className={adminShow}>
+                    <Admin />
+                </div>
+           </div>
+        );
+    }
+    
+    // return(
 
-    );
+    //     <div>            
+    //         {/* switch between lecture view and stats view */}
+    //         <div className="toggle">
+    //             <div onClick={() => {toggleView("lesson")}}>Lesson</div>
+    //             <div onClick={() => {toggleView("stats")}}>Stats</div>
+    //             <div onClick={() => {toggleView("admin")}}>Admin</div>
+    //         </div>
+
+    //         <div>
+    //             <h2 style={{margin: '1em 0 2em 0'}}>
+    //                 {heading}
+    //             </h2>
+    //         </div>
+
+    //         {/* landing page */}
+    //         <div className={`${lesson}`}>
+    //             {/* switch between quiz and forum */}
+    //             <div className={`switch-tab`} onClick={() => {swap('q')}}>Quiz</div>
+    //             <div className={`switch-tab frm`} onClick={() => {swap('f')}}>Forum</div>
+
+    //             <div className="video-forum">
+    //                 <Video onLock={onLock} time={time} done={quizDone} link={link} foc={swap}/>
+    //                 <Forum id={id} cforum={cforum} />
+    //                 <Quiz lock={lock} onLock={onLock} quiz={quiz} onDone={onDone} cquiz={cquiz} />
+    //             </div>
+    //         </div>
+
+    //         {/* Quiz statistics */}
+    //         <div className={statShow}>
+    //             <Stats stats={stats} cname={statShow}/>
+    //         </div>
+
+    //         {/* Admin */}
+    //         <div className={adminShow}>
+    //             <Admin />
+    //         </div>
+
+    //     </div>
+
+    // );
 }
 
 export default VideoForum;
