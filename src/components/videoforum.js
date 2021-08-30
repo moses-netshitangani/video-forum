@@ -3,10 +3,11 @@ import axios from 'axios';
 import Forum from './forum';
 import Video from './video';
 import Quiz from './quiz';
+import Stats from './stats';
 
 const VideoForum = () => {
 
-    // video and quiz stores
+    // video, quiz and stats stores
     const [link, onLink] = useState("");
     const [id, onId] = useState("");
     const [quizList, onList] = useState([]);
@@ -14,6 +15,7 @@ const VideoForum = () => {
     const [quizDone, onDone] = useState("no");
     const [time, onTime] = useState("");
     const [lock, onLock] = useState('true');
+    const [stats, OnStats] = useState([]);
 
     // forum and quiz display variables
     let [cforum, changeCforum] = useState("show");
@@ -32,6 +34,7 @@ const VideoForum = () => {
                 onList(res.data[0].quizzes);
                 onQuiz(res.data[0].quizzes[0]);
                 onTime(res.data[0].quizzes[0].time);
+                OnStats(res.data[0].quizzes[0].stats);
             })
             .catch(err => console.log(err));
         }
@@ -45,6 +48,7 @@ const VideoForum = () => {
                 onList(quizList);
                 onQuiz(quizList[0]);
                 onTime(quizList[0].time);
+                OnStats(stats.push(quizList[0].stats));
                 onDone("no");
             }
             else
@@ -87,6 +91,7 @@ const VideoForum = () => {
                 <Video onLock={onLock} time={time} done={quizDone} link={link} foc={swap}/>
                 <Forum id={id} cforum={cforum} />
                 <Quiz lock={lock} onLock={onLock} quiz={quiz} onDone={onDone} cquiz={cquiz} />
+                <Stats stats={stats} />
             </div>
 
         </div>

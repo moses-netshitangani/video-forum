@@ -15,8 +15,7 @@ function Admin () {
     const [link, setLink] = useState('');
 
     // stores quizzes
-    let quizList = [];    
-
+    let quizList = [];
 
     // extract all quiz values
     const extractValues = () => {
@@ -28,6 +27,7 @@ function Admin () {
         let co = document.getElementById("co").value;
         let t = document.getElementById("t").value;
 
+        // quiz model and stats
         let quizTemp = {
             question: q,
             optA: oa,
@@ -35,11 +35,17 @@ function Admin () {
             optC: oc,
             optD: od,
             correct: co,
-            time: t
+            time: t,
+            stats: [
+                { title: oa, value: 25, color: 'rgba(43, 122, 226, 0.082)' },
+                { title: ob, value: 25, color: 'rgb(147, 184, 201)' },
+                { title: oc, value: 25, color: 'rgba(43, 122, 226, 0.507)' },
+                { title: od, value: 25, color: 'rgba(43, 122, 226, 0.734)' }
+        ]
         }
 
+        // add quiz and default stats
         quizList.push(quizTemp);
-        console.log(quizList);
         alert(`Quiz #${quizList.length} added!`);
     }
 

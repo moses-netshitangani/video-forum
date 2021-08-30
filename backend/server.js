@@ -28,10 +28,5 @@ connection.once('open', () => console.log("Successfully connected to database.")
 const userRouter = require('./routes/admin');
 app.use('/setup', userRouter);
 
-// // local image route
-// app.use('/uploads', express.static('uploads'));
-
-
-
 // Listen on port 3000
 app.listen(3001, () => console.log('Server listening on port 3001'));
