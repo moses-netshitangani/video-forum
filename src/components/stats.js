@@ -42,6 +42,16 @@ const Stats = props => {
     return(
         <div className="stats-cover">
 
+            <div className="quiz-number">
+                {
+                    (current.length === 0)
+                    ? <div>Loading...</div>
+                    : <h3>
+                        {`Quiz ${props.stats.indexOf(current) + 1}`}
+                    </h3>
+                }
+            </div>
+
             {/* legend */}
             {
                 (current.length === 0)

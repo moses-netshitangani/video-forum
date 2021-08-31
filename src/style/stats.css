@@ -68,3 +68,8 @@
     border-right: 1px solid grey;
 }
 
+.quiz-number {
+    position: absolute;
+    left: 16em;
+    top: 8em;
+}
