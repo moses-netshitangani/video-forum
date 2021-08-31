@@ -7,75 +7,73 @@ const Stats = props => {
     // current quiz stats
     const [current, onCurrent] = useState([]);
     const [num, onNum] = useState(0);
-    const [t, onT] = useState(0);
+    const [index, onIndex] = useState(1);
 
     // display data for first quiz by default
     useEffect(() => {
         if(current.length === 0 && props.stats.length > 0)
         {
-            onCurrent(props.stats[0].stats);
+            // onCurrent(props.stats[0].stats);
+            onCurrent(props.stats[0]);
             onNum(props.stats.length);
         }
     });
 
     // switch between quiz data
     const switchData = e => {
-        alert(`t in ${t}`);
+
+        let pos = props.stats.indexOf(current);
         if(e === "next")
         {
             // move forward
-            onT(t + 1);
-            if(t === num)
-            {
-                onCurrent(props.stats[0].stats);
-                onT(0);
-            }
+            if(pos === num - 1)
+                onCurrent(props.stats[0]);
             else
-                onCurrent(props.stats[t].stats);
-
+                onCurrent(props.stats[pos + 1]);
         }else
         {
             // move backwards
-            onT(t - 1);
-            if(t < 0)
-            {
-                onCurrent(props.stats[num - 1].stats);
-                onT(num - 1);
-            }
+            if(pos === 0 || pos < 0)
+                onCurrent(props.stats[num - 1]);
             else
-                onCurrent(props.stats[t].stats);
+                onCurrent(props.stats[pos - 1]);
         }
-        alert(`t out ${t}`);
     }
 
     return(
         <div className="stats-cover">
 
             {/* legend */}
-            {/* <div className="legend">
-                <div className="legend-bar">
-                    <div style={{backgroundColor: props.stats[0].color}}></div>
-                    <p>{props.stats[0].title}</p>
+            {
+                (current.length === 0)
+                ? 
+                <div>Loading...</div>
+                : 
+                <div className="legend">
+                    <div className="legend-bar">
+                        <div style={{backgroundColor: current.stats[0].color}}></div>
+                        <p>{current.stats[0].title}</p>
+                    </div>
+                    <div className="legend-bar">
+                        <div style={{backgroundColor: current.stats[1].color}}></div>
+                        <p>{current.stats[1].title}</p>
+                    </div>
+                    <div className="legend-bar">
+                        <div style={{backgroundColor: current.stats[2].color}}></div>
+                        <p>{current.stats[2].title}</p>
+                    </div>
+                    <div className="legend-bar">
+                        <div style={{backgroundColor: current.stats[3].color}}></div>
+                        <p>{current.stats[3].title}</p>
+                    </div>
                 </div>
-                <div className="legend-bar">
-                    <div style={{backgroundColor: props.stats[1].color}}></div>
-                    <p>{props.stats[1].title}</p>
-                </div>
-                <div className="legend-bar">
-                    <div style={{backgroundColor: props.stats[2].color}}></div>
-                    <p>{props.stats[2].title}</p>
-                </div>
-                <div className="legend-bar">
-                    <div style={{backgroundColor: props.stats[3].color}}></div>
-                    <p>{props.stats[3].title}</p>
-                </div>
-            </div> */}
+            }
 
             {/* pie chart */}
             <div className="chart">
                 <PieChart
                     // data={props.stats}
-                    data={current}
+                    data={current.stats}
                     lineWidth="60" animate={true} animationDuration="2000"
                     label={({ x, y, dx, dy, dataEntry }) => (
                         <text
