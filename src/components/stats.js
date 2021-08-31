@@ -8,9 +8,10 @@ const Stats = props => {
     // const [dis, OnDis] = useState([]);
 
     // show quiz 1 data on load
-    useEffect(() => {
-        console.log("hey");
-    });
+    // useEffect(() => {
+    //     console.log(`actual`);
+    //     console.log(props.stats);
+    // });
 
     // switch between quiz data
     // const switchData = e => {

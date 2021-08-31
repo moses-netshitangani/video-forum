@@ -6,7 +6,7 @@ import Quiz from './quiz';
 import Stats from './stats';
 import Admin from './admin';
 
-const VideoForum = props => {
+const VideoForum = () => {
 
     // video, quiz and stats stores
     const [link, onLink] = useState("");
@@ -54,7 +54,7 @@ const VideoForum = props => {
                 onList(quizList);
                 onQuiz(quizList[0]);
                 onTime(quizList[0].time);
-                OnStats(stats.push(quizList[0].stats));
+                OnStats(stats.concat(quizList[0].stats));     // I think it's this line
                 onDone("no");
             }
             else
