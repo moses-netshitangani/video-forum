@@ -40,7 +40,8 @@ const VideoForum = () => {
                 onList(res.data[0].quizzes);
                 onQuiz(res.data[0].quizzes[0]);
                 onTime(res.data[0].quizzes[0].time);
-                OnStats(res.data[0].quizzes[0].stats);
+                // OnStats(res.data[0].quizzes[0].stats);
+                OnStats(res.data[0].quizzes);
             })
             .catch(err => console.log(err));
         }

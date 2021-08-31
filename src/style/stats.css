@@ -42,3 +42,29 @@
     height: 2.5em;
 }
 
+.chart-btns {
+    width: 10%;
+    height: 6%;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    left: 50%;
+    bottom: 8em;
+    margin-left: -5%;
+    border-radius: 0.75em;
+    box-sizing: border-box;
+    box-shadow: 0 0.188em 1.550em -0.525em rgb(65, 63, 63);
+    cursor: pointer;
+}
+
+.chart-btns div {
+    width: 50%;
+    transition: transform 0.5s;
+}
+
+
+.chart-btns div:first-of-type {
+    border-right: 1px solid grey;
+}
+
