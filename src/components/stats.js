@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import { PieChart } from 'react-minimal-pie-chart';
 import '../style/stats.css';
 
@@ -7,7 +7,6 @@ const Stats = props => {
     // current quiz stats
     const [current, onCurrent] = useState([]);
     const [num, onNum] = useState(0);
-    const [index, onIndex] = useState(1);
 
     // display data for first quiz by default
     useEffect(() => {
@@ -72,7 +71,6 @@ const Stats = props => {
             {/* pie chart */}
             <div className="chart">
                 <PieChart
-                    // data={props.stats}
                     data={current.stats}
                     lineWidth="60" animate={true} animationDuration="2000"
                     label={({ x, y, dx, dy, dataEntry }) => (
