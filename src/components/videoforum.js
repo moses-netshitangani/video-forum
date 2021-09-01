@@ -51,11 +51,12 @@ const VideoForum = () => {
         {
             if(quizList.length > 1)
             {
-                quizList.shift();
-                onList(quizList);
-                onQuiz(quizList[0]);
-                onTime(quizList[0].time);
-                OnStats(stats.concat(quizList[0].stats));     // I think it's this line
+                // quizList.shift();
+                let newQuizList = quizList.filter(fil);
+                onList(newQuizList);
+                // onList(quizList);
+                onQuiz(newQuizList[0]);
+                onTime(newQuizList[0].time);
                 onDone("no");
             }
             else
@@ -65,6 +66,11 @@ const VideoForum = () => {
             }
         }
     })
+
+    // filters first quiz object from list
+    const fil = e => {
+        return quizList.indexOf(e) > 0;
+    }
 
     // toggles forum or quiz
     let swap = e => {

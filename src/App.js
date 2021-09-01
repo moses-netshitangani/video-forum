@@ -13,8 +13,8 @@ function App() {
         <div style={{minHeight: '50em'}}>
             <Switch>
               <Route path="/" exact component={VideoForum}></Route>
-              <Route path="/stats" component={Stats}></Route>
-              <Route path="/setup" component={Admin}></Route>
+              {/* <Route path="/stats" component={Stats}></Route>
+              <Route path="/setup" component={Admin}></Route> */}
             </Switch>
         </div>
       </Router>

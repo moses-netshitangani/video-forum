@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { PieChart } from 'react-minimal-pie-chart';
 import '../style/stats.css';
 
@@ -12,7 +12,6 @@ const Stats = props => {
     useEffect(() => {
         if(current.length === 0 && props.stats.length > 0)
         {
-            // onCurrent(props.stats[0].stats);
             onCurrent(props.stats[0]);
             onNum(props.stats.length);
         }
