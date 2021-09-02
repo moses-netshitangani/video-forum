@@ -12,11 +12,12 @@ const VideoForum = () => {
     const [link, onLink] = useState("");
     const [id, onId] = useState("");
     const [quizList, onList] = useState([]);
+    const [statsList, onStatsList] = useState([]);
     const [quiz, onQuiz] = useState({});
     const [quizDone, onDone] = useState("no");
     const [time, onTime] = useState("");
     const [lock, onLock] = useState('true');
-    const [stats, OnStats] = useState([]);
+    // const [stats, OnStats] = useState([]);
 
     // forum and quiz display variables
     let [cforum, changeCforum] = useState("show");
@@ -33,6 +34,7 @@ const VideoForum = () => {
 
         if(link === "")
         {
+            // lesson data
             axios.get("http://localhost:3001/setup")
             .then(res => {
                 onLink(res.data[0].link);
@@ -41,9 +43,21 @@ const VideoForum = () => {
                 onQuiz(res.data[0].quizzes[0]);
                 onTime(res.data[0].quizzes[0].time);
                 // OnStats(res.data[0].quizzes[0].stats);
-                OnStats(res.data[0].quizzes);
+                // OnStats(res.data[0].quizzes);
             })
             .catch(err => console.log(err));
+
+            // stats data
+            axios.get("http://localhost:3001/stats/")
+            .then(res => {
+                // onId(res.data[0]._id);
+                // OnStats(res.data[0].quizzes[0].stats);
+                // splitData(res.data[0].stats);
+                onStatsList(res.data[0].stats);
+                // onCurrent(list.slice(0,4));
+            })
+            .catch(err => console.log(err));
+            // onNum(list.length);
         }
         
         // send next quiz, if available
@@ -146,7 +160,7 @@ const VideoForum = () => {
                     <div className="video-forum">
                         <Video onLock={onLock} time={time} done={quizDone} link={link} foc={swap}/>
                         <Forum id={id} cforum={cforum} />
-                        <Quiz lock={lock} onLock={onLock} quiz={quiz} onDone={onDone} cquiz={cquiz} />
+                        <Quiz id={id} lock={lock} onLock={onLock} quiz={quiz} onDone={onDone} cquiz={cquiz} />
                     </div>
                 </div>
             </div>
@@ -169,7 +183,7 @@ const VideoForum = () => {
                 </div>
 
                 <div className={statShow}>
-                    <Stats stats={stats} />
+                    <Stats stats={statsList} />
                 </div>
             </div>
         );

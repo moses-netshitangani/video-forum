@@ -1,10 +1,12 @@
 import React, {useEffect, useState} from 'react';
+import axios from 'axios';
 import { PieChart } from 'react-minimal-pie-chart';
 import '../style/stats.css';
 
 const Stats = props => {
 
     // current quiz stats
+    const [list, onList] = useState([]);
     const [current, onCurrent] = useState([]);
     const [num, onNum] = useState(0);
 
@@ -12,30 +14,77 @@ const Stats = props => {
     useEffect(() => {
         if(current.length === 0 && props.stats.length > 0)
         {
-            onCurrent(props.stats[0]);
+            onList(props.stats);
+            onCurrent(props.stats.slice(0, 4));
             onNum(props.stats.length);
         }
+        // if(current === undefined || current.length === 0 )
+        // {
+        //     axios.get("http://localhost:3001/stats/")
+        //     .then(res => {
+        //         // onId(res.data[0]._id);
+        //         // OnStats(res.data[0].quizzes[0].stats);
+        //         // splitData(res.data[0].stats);
+        //         onList(res.data[0].stats);
+        //         onCurrent(list.slice(0,4));
+        //     })
+        //     .catch(err => console.log(err));
+        //     onNum(list.length);
+
+        // }
     });
+    
+
+    // split stats data into objects
+    const splitData = e => {
+        let tempList = [];
+        for(let i = 1; i <= e.length; i++)
+        {
+            if(i % 4 !== 0)
+            {
+                onList(list.concat(tempList));
+                tempList = [];
+            }
+
+            tempList.push(e[i - 1]);
+        }
+
+    }
 
     // switch between quiz data
     const switchData = e => {
 
-        let pos = props.stats.indexOf(current);
+        let ind = list.findIndex(x => x.title === current[3].title);
+        let pos = Math.floor(ind / 4);
+        
         if(e === "next")
         {
             // move forward
-            if(pos === num - 1)
-                onCurrent(props.stats[0]);
+            if(pos === Math.floor(num / 4) - 1)
+            {
+                onCurrent(list.slice(0, 4));
+                console.log(list.slice(0, 4));
+            }
             else
-                onCurrent(props.stats[pos + 1]);
+            {
+                onCurrent(list.slice(ind + 1, ind + 5));
+                console.log(list.slice(ind + 1, ind + 5));
+            }
         }else
         {
             // move backwards
             if(pos === 0 || pos < 0)
-                onCurrent(props.stats[num - 1]);
+            {
+                onCurrent(list.slice(num - 4));
+                console.log(list.slice(num - 4));
+            }
             else
-                onCurrent(props.stats[pos - 1]);
+            {
+                onCurrent(list.slice(ind - 7, ind - 3));
+                console.log(list.slice(ind - 7, ind - 3));
+            }
         }
+       
     }
 
     return(
@@ -43,36 +92,37 @@ const Stats = props => {
 
             <div className="quiz-number">
                 {
-                    (current.length === 0)
+                    (current === undefined || current.length === 0 )
                     ? <div>Loading...</div>
                     : <h3>
-                        {`Quiz ${props.stats.indexOf(current) + 1}`}
+                        {/* {`Quiz ${props.stats.indexOf(current) + 1}`} */}
+                        {`Quiz ${Math.floor(list.findIndex(x => x.title === current[3].title) / 4) + 1}`}
                     </h3>
                 }
             </div>
 
             {/* legend */}
             {
-                (current.length === 0)
+                (current === undefined || current.length === 0)
                 ? 
                 <div>Loading...</div>
                 : 
                 <div className="legend">
                     <div className="legend-bar">
-                        <div style={{backgroundColor: current.stats[0].color}}></div>
-                        <p>{current.stats[0].title}</p>
+                        <div style={{backgroundColor: current[0].color}}></div>
+                        <p>{current[0].title}</p>
                     </div>
                     <div className="legend-bar">
-                        <div style={{backgroundColor: current.stats[1].color}}></div>
-                        <p>{current.stats[1].title}</p>
+                        <div style={{backgroundColor: current[1].color}}></div>
+                        <p>{current[1].title}</p>
                     </div>
                     <div className="legend-bar">
-                        <div style={{backgroundColor: current.stats[2].color}}></div>
-                        <p>{current.stats[2].title}</p>
+                        <div style={{backgroundColor: current[2].color}}></div>
+                        <p>{current[2].title}</p>
                     </div>
                     <div className="legend-bar">
-                        <div style={{backgroundColor: current.stats[3].color}}></div>
-                        <p>{current.stats[3].title}</p>
+                        <div style={{backgroundColor: current[3].color}}></div>
+                        <p>{current[3].title}</p>
                     </div>
                 </div>
             }
@@ -80,7 +130,7 @@ const Stats = props => {
             {/* pie chart */}
             <div className="chart">
                 <PieChart
-                    data={current.stats}
+                    data={current}
                     lineWidth="60" animate={true} animationDuration="2000"
                     label={({ x, y, dx, dy, dataEntry }) => (
                         <text

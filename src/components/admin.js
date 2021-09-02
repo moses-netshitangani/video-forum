@@ -17,6 +17,9 @@ function Admin () {
     // stores quizzes
     let quizList = [];
 
+    // store stats
+    let statsList = [];
+
     // extract all quiz values
     const extractValues = () => {
         let q = document.getElementById("ques").value;
@@ -36,17 +39,25 @@ function Admin () {
             optD: od,
             correct: co,
             time: t,
-            stats: [
+        //     stats: [
+        //         { title: oa, value: 25, color: 'rgba(43, 122, 226, 0.082)' },
+        //         { title: ob, value: 25, color: 'rgb(147, 184, 201)' },
+        //         { title: oc, value: 25, color: 'rgba(43, 122, 226, 0.507)' },
+        //         { title: od, value: 25, color: 'rgba(43, 122, 226, 0.734)' }
+        // ]
+        };
+
+        let statsTemp = [
                 { title: oa, value: 25, color: 'rgba(43, 122, 226, 0.082)' },
                 { title: ob, value: 25, color: 'rgb(147, 184, 201)' },
                 { title: oc, value: 25, color: 'rgba(43, 122, 226, 0.507)' },
                 { title: od, value: 25, color: 'rgba(43, 122, 226, 0.734)' }
-        ]
-        }
+        ];
 
         // add quiz and default stats
         quizList.push(quizTemp);
         alert(`Quiz #${quizList.length} added!`);
+        statsTemp.map(obj => statsList.push(obj));
     }
 
     // create lesson
@@ -56,10 +67,24 @@ function Admin () {
             quizzes: quizList
         }
 
+        // upload lesson
         axios.post("http://localhost:3001/setup/add", lesson)
         .then(res => {
             console.log(res);
             alert("Lesson submitted!");
+        })
+        .catch(err => {
+            console.log(err);
+        });
+
+        let chart = {
+            stats: statsList
+        }
+
+        // upload quiz statistics
+        axios.post("http://localhost:3001/stats/add", chart)
+        .then(res => {
+            console.log(res);
         })
         .catch(err => {
             console.log(err);

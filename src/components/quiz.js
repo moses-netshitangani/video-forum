@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import axios from 'axios';
 import "../style/quiz.css";
 
 const Quiz = props => {
@@ -63,11 +64,27 @@ const Quiz = props => {
     const submitAns = () => {
         if(selectedAns !== '')
         {
-            // onLock('lock');
-            alert(selectedAns);
-            props.onDone("yes");
-            props.onLock('lock');
-            resetOptions();
+            // upload answer
+            let newValue = {
+                title: selectedAns,
+            }
+    
+            // upload quiz statistics
+            axios.put("http://localhost:3001/stats/update", newValue)
+            .then(res => {
+                console.log(res);
+                alert(selectedAns);
+                props.onDone("yes");
+                props.onLock('lock');
+                resetOptions();
+            })
+            .catch(err => {
+                console.log(err);
+            });
+            // alert(selectedAns);
+            // props.onDone("yes");
+            // props.onLock('lock');
+            // resetOptions();
         }
         else
             alert("Choose a single option");
