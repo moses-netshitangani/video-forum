@@ -28,5 +28,9 @@ connection.once('open', () => console.log("Successfully connected to database.")
 const userRouter = require('./routes/admin');
 app.use('/setup', userRouter);
 
+// stats route
+const statsRouter = require('./routes/chart');
+app.use('/stats', statsRouter);
+
 // Listen on port 3000
 app.listen(3001, () => console.log('Server listening on port 3001'));

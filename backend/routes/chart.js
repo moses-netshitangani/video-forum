@@ -1,29 +1,28 @@
 const router = require('express').Router();
-let Quiz = require('../models/quiz.model');
+let Chart = require('../models/chart.model');
 
-// add quiz
+// add stats
 router.route('/add').post(async (req, res) => {
     try {
-        const quizObject = {
-            link: req.body.link,
-            quizzes: req.body.quizzes
+        const statObject = {
+            stats: req.body.stats
         }
-        const quiz = new Quiz(quizObject);
-        console.log(`quiz object: ${quiz}`);
+        const stat = new Chart(statObject);
+        console.log(`stat object: ${stat}`);
 
-        quiz.save()
-            .then(quiz => res.json(quiz))
-            .then(console.log('Quiz successfully added.'))
-            .catch(err => res.status(400).json("Error tryna save quiz") + err);
+        stat.save()
+            .then(stat => res.json(stat))
+            .then(console.log('Stat successfully added.'))
+            .catch(err => res.status(400).json("Error tryna save stat") + err);
     } catch {
         res.status(500).send();
     }    
 })
 
-// retrieve quiz
+// retrieve stat
 router.route('/').get((req, res) => {
-    Quiz.find().sort({createdAt: -1})
-        .then(quiz => res.json(quiz))
+    Chart.find().sort({createdAt: -1})
+        .then(stat => res.json(stat))
         .catch(err => res.status(400).json("Error tryna get admin") + err);
 })
 
@@ -32,14 +31,12 @@ router.route('/update').put(async (req, res) => {
     try
     {
         const title = req.body.title;
-        // const val = req.params.value;
-        console.log(`TITLE IS ${title}`);
 
-        Quiz.findOneAndUpdate({'quizzes.stats.title': title}, {'$set': {
-            'quizzes.$.stats.$.value': 10
+        Chart.findOneAndUpdate({'stats.title': title}, {'$inc': {
+            'stats.$.value': 1
         }})
-        .then(q => console.log(q))
-        .catch(err => console.log(err));
+        .then(q => res.json(q))
+        .catch(err => res.status(400).json("Error trying to increment") + err);
     } catch {
         res.status(500).send();
     }
