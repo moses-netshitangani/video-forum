@@ -35,3 +35,8 @@ app.use('/stats', statsRouter);
 
 // Listen on port 3000
 app.listen(PORT, () => console.log('Server listening on port 3001'));
+
+if(process.env.NODE_ENV === 'production')
+{
+    app.use(express.static('build'));
+}
