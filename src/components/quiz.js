@@ -64,7 +64,6 @@ const Quiz = props => {
     const submitAns = () => {
         if(selectedAns !== '')
         {
-            // upload answer
             let newValue = {
                 title: selectedAns,
             }
@@ -81,10 +80,7 @@ const Quiz = props => {
             .catch(err => {
                 console.log(err);
             });
-            // alert(selectedAns);
-            // props.onDone("yes");
-            // props.onLock('lock');
-            // resetOptions();
+            
         }
         else
             alert("Choose a single option");

@@ -95,7 +95,6 @@ const Stats = props => {
                     (current === undefined || current.length === 0 )
                     ? <div>Loading...</div>
                     : <h3>
-                        {/* {`Quiz ${props.stats.indexOf(current) + 1}`} */}
                         {`Quiz ${Math.floor(list.findIndex(x => x.title === current[3].title) / 4) + 1}`}
                     </h3>
                 }

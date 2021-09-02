@@ -17,7 +17,6 @@ const VideoForum = () => {
     const [quizDone, onDone] = useState("no");
     const [time, onTime] = useState("");
     const [lock, onLock] = useState('true');
-    // const [stats, OnStats] = useState([]);
 
     // forum and quiz display variables
     let [cforum, changeCforum] = useState("show");
@@ -34,41 +33,21 @@ const VideoForum = () => {
 
         if(link === "")
         {
-            // lesson data
-            axios.get("http://localhost:3001/setup")
-            .then(res => {
-                onLink(res.data[0].link);
-                onId(res.data[0]._id);
-                onList(res.data[0].quizzes);
-                onQuiz(res.data[0].quizzes[0]);
-                onTime(res.data[0].quizzes[0].time);
-                // OnStats(res.data[0].quizzes[0].stats);
-                // OnStats(res.data[0].quizzes);
-            })
-            .catch(err => console.log(err));
+            // fetch lesson
+            fetchLesson();
 
-            // stats data
-            axios.get("http://localhost:3001/stats/")
-            .then(res => {
-                // onId(res.data[0]._id);
-                // OnStats(res.data[0].quizzes[0].stats);
-                // splitData(res.data[0].stats);
-                onStatsList(res.data[0].stats);
-                // onCurrent(list.slice(0,4));
-            })
-            .catch(err => console.log(err));
-            // onNum(list.length);
+            // fetch quiz statistics
+            fetchStats();
         }
         
         // send next quiz, if available
         if(quizDone === "yes")
         {
+            fetchStats();
             if(quizList.length > 1)
             {
-                // quizList.shift();
                 let newQuizList = quizList.filter(fil);
                 onList(newQuizList);
-                // onList(quizList);
                 onQuiz(newQuizList[0]);
                 onTime(newQuizList[0].time);
                 onDone("no");
@@ -80,6 +59,26 @@ const VideoForum = () => {
             }
         }
     })
+
+    // fetch statistics
+    const fetchStats = () => {
+        axios.get("http://localhost:3001/stats/")
+        .then(res => onStatsList(res.data[0].stats))
+        .catch(err => console.log(err));
+    }
+
+    // fetch lesson
+    const fetchLesson = () => {
+        axios.get("http://localhost:3001/setup")
+        .then(res => {
+            onLink(res.data[0].link);
+            onId(res.data[0]._id);
+            onList(res.data[0].quizzes);
+            onQuiz(res.data[0].quizzes[0]);
+            onTime(res.data[0].quizzes[0].time);
+        })
+        .catch(err => console.log(err));
+    }
 
     // filters first quiz object from list
     const fil = e => {
@@ -134,16 +133,17 @@ const VideoForum = () => {
         }
     }
 
-
     if(lesson === "flex")
     {
         return (
             // landing page 
             <div>
                  <div className="toggle">
-                 <div onClick={() => {toggleView("lesson")}}>Lesson</div>
-                 <div onClick={() => {toggleView("stats")}}>Stats</div>
-                 <div onClick={() => {toggleView("admin")}}>Admin</div>
+                    <div className="toggle-inner">
+                        <div onClick={() => {toggleView("lesson")}}>Lesson</div>
+                        <div onClick={() => {toggleView("stats")}}>Stats</div>
+                        <div onClick={() => {toggleView("admin")}}>Admin</div>
+                    </div>
                 </div>
 
                 <div>
@@ -210,48 +210,6 @@ const VideoForum = () => {
         );
     }
     
-    // return(
-
-    //     <div>            
-    //         {/* switch between lecture view and stats view */}
-    //         <div className="toggle">
-    //             <div onClick={() => {toggleView("lesson")}}>Lesson</div>
-    //             <div onClick={() => {toggleView("stats")}}>Stats</div>
-    //             <div onClick={() => {toggleView("admin")}}>Admin</div>
-    //         </div>
-
-    //         <div>
-    //             <h2 style={{margin: '1em 0 2em 0'}}>
-    //                 {heading}
-    //             </h2>
-    //         </div>
-
-    //         {/* landing page */}
-    //         <div className={`${lesson}`}>
-    //             {/* switch between quiz and forum */}
-    //             <div className={`switch-tab`} onClick={() => {swap('q')}}>Quiz</div>
-    //             <div className={`switch-tab frm`} onClick={() => {swap('f')}}>Forum</div>
-
-    //             <div className="video-forum">
-    //                 <Video onLock={onLock} time={time} done={quizDone} link={link} foc={swap}/>
-    //                 <Forum id={id} cforum={cforum} />
-    //                 <Quiz lock={lock} onLock={onLock} quiz={quiz} onDone={onDone} cquiz={cquiz} />
-    //             </div>
-    //         </div>
-
-    //         {/* Quiz statistics */}
-    //         <div className={statShow}>
-    //             <Stats stats={stats} cname={statShow}/>
-    //         </div>
-
-    //         {/* Admin */}
-    //         <div className={adminShow}>
-    //             <Admin />
-    //         </div>
-
-    //     </div>
-
-    // );
 }
 
 export default VideoForum;

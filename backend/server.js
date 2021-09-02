@@ -1,4 +1,5 @@
 const express = require('express');
+require('dotenv').config();
 const cors = require('cors');
 const mongoose = require('mongoose');
 // require('dotenv').config();
@@ -9,8 +10,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const URI = "mongodb+srv://C19_User:Presariocq57$$@cluster0.9z40c.gcp.mongodb.net/OnlineSuccess?retryWrites=true&w=majority";
-// const PORT = 3000;
+const URI = `${process.env.ATLAS_URI}`;
+const PORT = process.env.PORT || 3001;
 
 mongoose.connect(URI, { useUnifiedTopology: true, useNewUrlParser: true})
 .then(() => {
@@ -33,4 +34,4 @@ const statsRouter = require('./routes/chart');
 app.use('/stats', statsRouter);
 
 // Listen on port 3000
-app.listen(3001, () => console.log('Server listening on port 3001'));
+app.listen(PORT, () => console.log('Server listening on port 3001'));

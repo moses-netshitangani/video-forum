@@ -106,22 +106,32 @@
   height: 2em;
   border-radius: 0.75em;
   background-color: #3473f1c0;
-  display: flex;
-  flex-direction: column;
+  background-image: url('./imgs/arrow.png');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
-.toggle div {
-  border: 1px solid grey;
+.toggle-inner {
+  margin-top: 1em;
+  height: 4.25em;
   /* display: none; */
+  background-color: #61dafb;
+  border-radius: 0.75em;
+}
+
+.toggle-inner div {
+  border: 1px solid grey;
+  display: inherit;
   margin: 0 auto;
   width: 90%;
-  height: 98%;
+  /* height: 60%; */
   box-sizing: border-box;
   border-top: none;
   border-left: none;
   border-right: none;
 }
 
-.toggle div:first-of-type {
-  display: initial;
+.toggle-inner div:last-of-type {
+  border: none;
 }
