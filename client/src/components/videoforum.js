@@ -67,14 +67,15 @@ const VideoForum = () => {
 
     // fetch statistics
     const fetchStats = () => {
-        axios.get("http://localhost:3001/stats/")
+        console.log(process.env);
+        axios.get("/stats")
         .then(res => onStatsList(res.data[0].stats))
         .catch(err => console.log(err));
     }
 
     // fetch lesson
     const fetchLesson = () => {
-        axios.get("http://localhost:3001/setup")
+        axios.get("/setup")
         .then(res => {
             onLink(res.data[0].link);
             onId(res.data[0]._id);
