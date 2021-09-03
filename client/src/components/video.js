@@ -26,7 +26,7 @@ const Video = props => {
     useEffect(() => {
         if(props.done === "yes")
             onPlayChange(true);
-    });
+    }, [props.done]);
 
     // seek back to quiz
     const seekBack = () => {

@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import axios from 'axios';
 import { PieChart } from 'react-minimal-pie-chart';
 import '../style/stats.css';
 
@@ -32,24 +31,24 @@ const Stats = props => {
         //     onNum(list.length);
 
         // }
-    });
+    }, [current.length, props.stats]);
     
 
     // split stats data into objects
-    const splitData = e => {
-        let tempList = [];
-        for(let i = 1; i <= e.length; i++)
-        {
-            if(i % 4 !== 0)
-            {
-                onList(list.concat(tempList));
-                tempList = [];
-            }
+    // const splitData = e => {
+    //     let tempList = [];
+    //     for(let i = 1; i <= e.length; i++)
+    //     {
+    //         if(i % 4 !== 0)
+    //         {
+    //             onList(list.concat(tempList));
+    //             tempList = [];
+    //         }
 
-            tempList.push(e[i - 1]);
-        }
+    //         tempList.push(e[i - 1]);
+    //     }
 
-    }
+    // }
 
     // switch between quiz data
     const switchData = e => {

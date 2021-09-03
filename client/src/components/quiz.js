@@ -21,7 +21,7 @@ const Quiz = props => {
             onC(props.quiz.optC);
             onD(props.quiz.optD);
         }
-    });
+    }, [props.quiz.length, props.quiz.question, props.quiz.optA, props.quiz.optB, props.quiz.optC, props.quiz.optD]);
 
     // highlights the selected quiz option
     const checkAnswer = num => {
@@ -44,6 +44,9 @@ const Quiz = props => {
                         break;
                     case 4:
                         onSelect(optD);
+                        break;
+                    default:
+                        onSelect("Error while selecting option");
                         break;
                 }
             }

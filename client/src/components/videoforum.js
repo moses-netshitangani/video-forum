@@ -31,6 +31,11 @@ const VideoForum = () => {
     // fetch lecture video and quiz data
     useEffect(() => {
 
+        // filters first quiz object from list
+        const fil = e => {
+            return quizList.indexOf(e) > 0;
+        }
+
         if(link === "")
         {
             // fetch lesson
@@ -58,7 +63,7 @@ const VideoForum = () => {
                 onTime("90:55");
             }
         }
-    })
+    }, [link, quizDone, quizList])
 
     // fetch statistics
     const fetchStats = () => {
@@ -80,10 +85,10 @@ const VideoForum = () => {
         .catch(err => console.log(err));
     }
 
-    // filters first quiz object from list
-    const fil = e => {
-        return quizList.indexOf(e) > 0;
-    }
+    // // filters first quiz object from list
+    // const fil = e => {
+    //     return quizList.indexOf(e) > 0;
+    // }
 
     // toggles forum or quiz
     let swap = e => {

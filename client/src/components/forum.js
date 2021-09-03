@@ -8,8 +8,9 @@ const Forum = props => {
 
     useEffect(() => {
         // Obtaining article id for display
-        idChange(props.id);
-    }, []);
+        if(id === "")
+            idChange(props.id);
+    }, [id, props.id]);
 
     // disqus setup
     const disqusShortname = "tsugi";

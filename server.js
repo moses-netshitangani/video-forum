@@ -2,7 +2,8 @@ const express = require('express');
 require('dotenv').config();
 const cors = require('cors');
 const mongoose = require('mongoose');
-// require('dotenv').config();
+const path = require('path');
+require('dotenv').config();
 
 const app = express();
 
@@ -33,10 +34,16 @@ app.use('/setup', userRouter);
 const statsRouter = require('./routes/chart');
 app.use('/stats', statsRouter);
 
-// Listen on port 3000
-app.listen(PORT, () => console.log('Server listening on port 3001'));
-
+// serve static assets
 if(process.env.NODE_ENV === 'production')
 {
     app.use(express.static('build'));
+
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    });
 }
+
+// Listen on port 3000
+app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
+

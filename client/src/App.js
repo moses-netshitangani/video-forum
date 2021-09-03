@@ -1,7 +1,5 @@
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import VideoForum from './components/videoforum';
-import Stats from './components/stats';
-import Admin from './components/admin';
 import './App.css';
 
 function App() {
