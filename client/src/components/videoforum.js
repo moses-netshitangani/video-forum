@@ -22,6 +22,7 @@ const VideoForum = () => {
     let [cforum, changeCforum] = useState("show");
     let [cquiz, changeCquiz] = useState("hide");
     const [heading, changeHeading] = useState('Lecture-Video Forum Component');
+    const [menu, onMenu] = useState("hide");
 
     // toggling other tabs
     const [lesson, onLesson] = useState("flex");
@@ -86,11 +87,6 @@ const VideoForum = () => {
         .catch(err => console.log(err));
     }
 
-    // // filters first quiz object from list
-    // const fil = e => {
-    //     return quizList.indexOf(e) > 0;
-    // }
-
     // toggles forum or quiz
     let swap = e => {
         if(lesson === "flex")
@@ -139,17 +135,28 @@ const VideoForum = () => {
         }
     }
 
+    // displays menu
+    const showMenu = () => {
+        if(menu === "hide")
+            onMenu("toggle-inner");
+        else
+            onMenu("hide");
+    }
+
     if(lesson === "flex")
     {
         return (
             // landing page 
             <div>
-                 <div className="toggle">
-                    <div className="toggle-inner">
-                        <div onClick={() => {toggleView("lesson")}}>Lesson</div>
-                        <div onClick={() => {toggleView("stats")}}>Stats</div>
-                        <div onClick={() => {toggleView("admin")}}>Admin</div>
-                    </div>
+                <div className="toggle" onClick={showMenu}>
+                    <div></div>
+                    <div></div>
+                </div>
+
+                <div className={menu}>
+                    <div onClick={() => {toggleView("lesson")}}>Lesson</div>
+                    <div onClick={() => {toggleView("stats")}}>Stats</div>
+                    <div onClick={() => {toggleView("admin")}}>Admin</div>
                 </div>
 
                 <div>
@@ -176,7 +183,12 @@ const VideoForum = () => {
     {
         return (
             <div>
-                <div className="toggle">
+                <div className="toggle" onClick={showMenu}>
+                    <div></div>
+                    <div></div>
+                </div>
+
+                <div className={menu}>
                     <div onClick={() => {toggleView("lesson")}}>Lesson</div>
                     <div onClick={() => {toggleView("stats")}}>Stats</div>
                     <div onClick={() => {toggleView("admin")}}>Admin</div>
@@ -198,10 +210,15 @@ const VideoForum = () => {
     {
         return (
            <div>
-                <div className="toggle">
-                 <div onClick={() => {toggleView("lesson")}}>Lesson</div>
-                 <div onClick={() => {toggleView("stats")}}>Stats</div>
-                 <div onClick={() => {toggleView("admin")}}>Admin</div>
+                <div className="toggle" onClick={showMenu}>
+                    <div></div>
+                    <div></div>
+                </div>
+
+                <div className={menu}>
+                    <div onClick={() => {toggleView("lesson")}}>Lesson</div>
+                    <div onClick={() => {toggleView("stats")}}>Stats</div>
+                    <div onClick={() => {toggleView("admin")}}>Admin</div>
                 </div>
 
                 <div>
