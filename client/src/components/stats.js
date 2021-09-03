@@ -17,39 +17,9 @@ const Stats = props => {
             onCurrent(props.stats.slice(0, 4));
             onNum(props.stats.length);
         }
-        // if(current === undefined || current.length === 0 )
-        // {
-        //     axios.get("http://localhost:3001/stats/")
-        //     .then(res => {
-        //         // onId(res.data[0]._id);
-        //         // OnStats(res.data[0].quizzes[0].stats);
-        //         // splitData(res.data[0].stats);
-        //         onList(res.data[0].stats);
-        //         onCurrent(list.slice(0,4));
-        //     })
-        //     .catch(err => console.log(err));
-        //     onNum(list.length);
-
-        // }
+        
     }, [current.length, props.stats]);
     
-
-    // split stats data into objects
-    // const splitData = e => {
-    //     let tempList = [];
-    //     for(let i = 1; i <= e.length; i++)
-    //     {
-    //         if(i % 4 !== 0)
-    //         {
-    //             onList(list.concat(tempList));
-    //             tempList = [];
-    //         }
-
-    //         tempList.push(e[i - 1]);
-    //     }
-
-    // }
-
     // switch between quiz data
     const switchData = e => {
 

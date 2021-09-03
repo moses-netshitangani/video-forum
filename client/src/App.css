@@ -146,10 +146,6 @@
   border-right: none;
 }
 
-.toggle-inner div:last-of-type {
-  border: none;
-}
-
 @keyframes showMenu {
   0%{
     color: transparent;

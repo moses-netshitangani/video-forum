@@ -99,3 +99,13 @@ input:focus {
     padding-top: 0.75em;
 }
 
+.steps {
+    position: absolute;
+    top: 5em;
+    display: flex;
+    justify-content: space-around;
+    width: 80em;
+    left: 50%;
+    margin-left: -40em;
+    color: grey;
+}
