@@ -1,0 +1,30 @@
+{
+  "name": "video-forum",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"", 
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moses-netshitangani/video-forum.git"
+  },
+  "author": "Moses",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/moses-netshitangani/video-forum/issues"
+  },
+  "homepage": "https://github.com/moses-netshitangani/video-forum#readme",
+  "dependencies": {
+    "concurrently": "^6.2.1",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^6.0.4"
+  }
+}
