@@ -68,7 +68,7 @@ function Admin () {
         }
 
         // upload lesson
-        axios.post("http://localhost:3001/setup/add", lesson)
+        axios.post("/setup/add", lesson)
         .then(res => {
             console.log(res);
             alert("Lesson submitted!");
@@ -82,7 +82,7 @@ function Admin () {
         }
 
         // upload quiz statistics
-        axios.post("http://localhost:3001/stats/add", chart)
+        axios.post("/stats/add", chart)
         .then(res => {
             console.log(res);
         })

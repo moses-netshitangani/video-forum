@@ -72,7 +72,7 @@ const Quiz = props => {
             }
     
             // upload quiz statistics
-            axios.put("http://localhost:3001/stats/update", newValue)
+            axios.put("/stats/update", newValue)
             .then(res => {
                 console.log(res);
                 alert(selectedAns);
