@@ -2,7 +2,7 @@
     background-color: rgba(43, 122, 226, 0.082);
     width: 75%;
     margin: 0 0 0 1em;
-    padding: 1em;
+    padding: 0 1em;
     border-radius: 0.9em 0 0.9em 0.9em;
     position: relative;
 }
@@ -14,7 +14,7 @@
 
 .option {
     background-color: rgba(43, 122, 226, 0.253);
-    margin: 2em auto;
+    margin: 1.5em auto;
     padding: 0.025em;
     border-radius: 0.75em;
     width: 98%;
@@ -61,12 +61,16 @@
 
 .submit-btn {
     margin: 0 auto;
-    width: 50%;
+    width: 14em;
     height: 6%;
-    background-color: rgb(147, 184, 201);
+    background-color: rgba(6, 143, 206, 0.534);
     border-radius: 0.8em;
     padding: 0.75em;
     transition: 0.5s;
+    position: absolute;
+    bottom: 0.5em;
+    left: 50%;
+    margin-left: -7em;
 }
 
 .submit-btn:hover {
@@ -77,7 +81,8 @@
 .lock {
     background-color: rgba(0, 255, 255, 0);
     width: 95%;
-    height: 95%;
+    height: 100%;
     position: absolute;
     margin: 0 auto;
+    z-index: 9;
 }
