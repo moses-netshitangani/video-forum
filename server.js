@@ -43,6 +43,6 @@ if(process.env.NODE_ENV === 'production')
     });
 }
 
-// Listen on port 3000
+// Listen on designated port
 app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
 
