@@ -13,10 +13,10 @@ const Forum = props => {
     }, [id, props.id]);
 
     // disqus setup
-    const disqusShortname = "tsugi";
+    const disqusShortname = "tsugi-1";
     const disqusConfig = {
-      url: "http://localhost:3000#!newthread",
-      identifier: `${id}-removethispart`,
+      url: "https://pacific-taiga-25458.herokuapp.com/#!newthread",
+      identifier: `${id}`,
       title: "OnlineSuccess",
       language: 'en_US'
     }

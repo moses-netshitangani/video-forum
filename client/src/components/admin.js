@@ -22,31 +22,31 @@ function Admin () {
 
     // extract all quiz values
     const extractValues = () => {
-        let q = document.getElementById("ques");
-        let oa = document.getElementById("oa");
-        let ob = document.getElementById("ob");
-        let oc = document.getElementById("oc");
-        let od = document.getElementById("od");
-        let t = document.getElementById("t");
+        let q = document.getElementById("ques").value;
+        let oa = document.getElementById("oa").value;
+        let ob = document.getElementById("ob").value;
+        let oc = document.getElementById("oc").value;
+        let od = document.getElementById("od").value;
+        let t = document.getElementById("t").value;
 
         if(t.value === "")
             t.value = "99:56";
 
         // quiz model and stats
         let quizTemp = {
-            question: q.value,
-            optA: oa.value,
-            optB: ob.value,
-            optC: oc.value,
-            optD: od.value,
-            time: t.value
+            question: q,
+            optA: oa,
+            optB: ob,
+            optC: oc,
+            optD: od,
+            time: t
         };
 
         let statsTemp = [
-                { title: oa, value: 25, color: 'rgba(43, 122, 226, 0.082)' },
-                { title: ob, value: 25, color: 'rgb(147, 184, 201)' },
-                { title: oc, value: 25, color: 'rgba(43, 122, 226, 0.507)' },
-                { title: od, value: 25, color: 'rgba(43, 122, 226, 0.734)' }
+                { title: oa, value: 0, color: 'rgba(43, 122, 226, 0.082)' },
+                { title: ob, value: 0, color: 'rgb(147, 184, 201)' },
+                { title: oc, value: 0, color: 'rgba(43, 122, 226, 0.507)' },
+                { title: od, value: 0, color: 'rgba(43, 122, 226, 0.734)' }
         ];
 
         // add quiz and default stats
@@ -55,12 +55,12 @@ function Admin () {
         statsTemp.map(obj => statsList.push(obj));
 
         // reset values
-        q.value = '';
-        oa.value = '';
-        ob.value = '';
-        oc.value = '';
-        od.value = '';
-        t.value = '';
+        document.getElementById("ques").value = '';
+        document.getElementById("oa").value = '';
+        document.getElementById("ob").value = '';
+        document.getElementById("oc").value = '';
+        document.getElementById("od").value = '';
+        document.getElementById("t").value = '';
     }
 
     // create lesson
