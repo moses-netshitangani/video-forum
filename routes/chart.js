@@ -31,8 +31,11 @@ router.route('/update').put(async (req, res) => {
     try
     {
         const title = req.body.title;
+        const id = req.body.id;
 
-        Chart.findOneAndUpdate({'stats.title': title}, {'$inc': {
+        console.log(`TITLE IS ${title}`);
+
+        Chart.findOneAndUpdate({'_id': id, 'stats.title': title}, {'$inc': {
             'stats.$.value': 1
         }})
         .then(q => res.json(q))
@@ -40,25 +43,6 @@ router.route('/update').put(async (req, res) => {
     } catch {
         res.status(500).send();
     }
-
-    // {
-    //     _id: 1,
-    //     name: 'John Smith',
-    //     items: [{
-    //        id: 1,
-    //        name: 'item 1',
-    //        value: 'one'
-    //     },{
-    //        id: 2,
-    //        name: 'item 2',
-    //        value: 'two'
-    //     }]
-    //   }
-
-    //   Person.update({'items.id': 2}, {'$set': {
-    //     'items.$.name': 'updated item2',
-    //     'items.$.value': 'two updated'
-    // }}
 })
 
 module.exports = router;

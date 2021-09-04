@@ -11,6 +11,7 @@ const VideoForum = () => {
     // video, quiz and stats stores
     const [link, onLink] = useState("");
     const [id, onId] = useState("");
+    const [stat_id, onStatId] = useState("");
     const [quizList, onList] = useState([]);
     const [statsList, onStatsList] = useState([]);
     const [quiz, onQuiz] = useState({});
@@ -68,9 +69,13 @@ const VideoForum = () => {
 
     // fetch statistics
     const fetchStats = () => {
-        console.log(process.env);
         axios.get("/stats")
-        .then(res => onStatsList(res.data[0].stats))
+        .then(res => {
+            onStatsList(res.data[0].stats);
+            onStatId(res.data[0]._id);
+            console.log("videoforum...");
+            console.log(res.data[0]);
+        })
         .catch(err => console.log(err));
     }
 
@@ -173,7 +178,7 @@ const VideoForum = () => {
                     <div className="video-forum">
                         <Video onLock={onLock} time={time} done={quizDone} link={link} foc={swap}/>
                         <Forum id={id} cforum={cforum} />
-                        <Quiz id={id} lock={lock} onLock={onLock} quiz={quiz} onDone={onDone} cquiz={cquiz} />
+                        <Quiz id={id} stat_id={stat_id} lock={lock} onLock={onLock} quiz={quiz} onDone={onDone} cquiz={cquiz} />
                     </div>
                 </div>
             </div>

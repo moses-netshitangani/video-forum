@@ -69,12 +69,12 @@ const Quiz = props => {
         {
             let newValue = {
                 title: selectedAns,
+                id: props.stat_id
             }
     
             // upload quiz statistics
             axios.put("/stats/update", newValue)
             .then(res => {
-                console.log(res);
                 alert(selectedAns);
                 props.onDone("yes");
                 props.onLock('lock');

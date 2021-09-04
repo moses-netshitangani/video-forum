@@ -81,7 +81,7 @@ function Admin () {
         });
 
         let chart = {
-            stats: statsList
+            stats: statsList,
         }
 
         // upload quiz statistics
