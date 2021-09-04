@@ -9,6 +9,7 @@ const chartSchema = new mongoose.Schema(
         timestamps: true
     });
 
+// save to the stats collection
 chartSchema.set('collection', 'stats');
 const Chart = mongoose.model('Chart', chartSchema);
 
