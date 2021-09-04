@@ -12,7 +12,7 @@ const Forum = props => {
         if(id === "")
         {
             idChange(props.id);
-            urlChange(`https://pacific-taiga-25458.herokuapp.com/${id}#!newthread`);
+            urlChange(`https://pacific-taiga-25458.herokuapp.com/${id}`);
         }
     }, [id, props.id]);
 
