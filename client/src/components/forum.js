@@ -35,8 +35,6 @@ const Forum = props => {
                 shortname={disqusShortname}
                 config={disqusConfig}
             />
-            <h3>{id}</h3>
-            <h4>{url}</h4>
         </div>
     )
 }
