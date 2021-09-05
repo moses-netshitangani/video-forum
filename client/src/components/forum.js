@@ -5,16 +5,17 @@ import "../style/forum.css";
 const Forum = props => {
 
     const [id, idChange] = useState("");
-    // const [url, urlChange] = useState("");
-    let url = window.location.href;
+    const [url, urlChange] = useState("");
+    // let url = window.location.href;
 
     useEffect(() => {
         // Obtaining article id for display
         if(id === "")
         {
-            console.log("id is empty")
-            idChange(props.id);
-            // urlChange(`https://pacific-taiga-25458.herokuapp.com/`);
+            let tempId = props.id;
+            let tempURL = `https://pacific-taiga-25458.herokuapp.com/${tempId}`;
+            idChange(tempId);
+            urlChange(tempURL);
         }
     }, [id, props.id]);
 
@@ -34,6 +35,8 @@ const Forum = props => {
                 shortname={disqusShortname}
                 config={disqusConfig}
             />
+            <h3>{id}</h3>
+            <h4>{url}</h4>
         </div>
     )
 }

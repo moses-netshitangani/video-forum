@@ -22,7 +22,7 @@ const Stats = props => {
             onCurrentRes(props.resp[0]);
         }
         
-    }, [current.length, props.stats]);
+    }, [current.length, props.stats, props.resp]);
     
     // switch between quiz data
     const switchData = e => {

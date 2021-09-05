@@ -31,8 +31,72 @@ const Lesson = () => {
     const [statShow, onStatShow] = useState("hide");
     const [adminShow, onAdminShow] = useState("hide");
 
+    
+
+    // fetch statistics
+    const fetchStats = () => {
+        axios.get("/stats")
+        .then(res => {
+            onStatsList(res.data[0].stats);
+            onStatId(res.data[0]._id);
+        })
+        .catch(err => console.log(err));
+    }
+
+    
+
+    // collect number of responses
+    const collectResponses = liss => {
+        let tempList = [];
+        for(let i = 0; i < liss.length; i++)
+        {
+            let r = [liss[i].resp];
+            tempList.push(r);
+        }
+        onResp(tempList);
+    }
+
+    
+
     // fetch lecture video and quiz data
     useEffect(() => {
+
+        // fetch lesson
+        const fetchLesson = () => {
+            axios.get("/setup")
+            .then(res => {
+                onLink(res.data[0].link);
+                onId(res.data[0]._id);
+                onList(res.data[0].quizzes);
+                onQuiz(res.data[0].quizzes[0]);
+                onTime(res.data[0].quizzes[0].time);
+                collectResponses(res.data[0].quizzes);
+            })
+            .catch(err => console.log(err));
+        }
+
+        // fetch responses
+        const fetchResp = () => {
+            axios.get("/setup")
+            .then(res => {
+                collectResponses(res.data[0].quizzes);
+            })
+            .catch(err => console.log(err));
+        }
+
+        // update number of responses
+        const updateResponses = () => {
+
+            let updateObject = {
+                id: id,
+                question: quiz.question
+            }
+            axios.put("/setup/update", updateObject)
+            .then(res => {
+                console.log(res);
+            })
+            .catch(err => console.log(err));
+        }
 
         // filters first quiz object from list
         const fil = e => {
@@ -71,67 +135,7 @@ const Lesson = () => {
             onDone("no");
         }
 
-
-    }, [link, quizDone, quizList, respon])
-
-    // fetch statistics
-    const fetchStats = () => {
-        axios.get("/stats")
-        .then(res => {
-            onStatsList(res.data[0].stats);
-            onStatId(res.data[0]._id);
-        })
-        .catch(err => console.log(err));
-    }
-
-    // fetch lesson
-    const fetchLesson = () => {
-        axios.get("/setup")
-        .then(res => {
-            onLink(res.data[0].link);
-            onId(res.data[0]._id);
-            onList(res.data[0].quizzes);
-            onQuiz(res.data[0].quizzes[0]);
-            onTime(res.data[0].quizzes[0].time);
-            collectResponses(res.data[0].quizzes);
-        })
-        .catch(err => console.log(err));
-    }
-
-    // fetch responses
-    const fetchResp = () => {
-        axios.get("/setup")
-        .then(res => {
-            collectResponses(res.data[0].quizzes);
-        })
-        .catch(err => console.log(err));
-    }
-
-    // collect number of responses
-    const collectResponses = liss => {
-        let tempList = [];
-        for(let i = 0; i < liss.length; i++)
-        {
-            let r = [liss[i].resp];
-            tempList.push(r);
-            console.log(tempList);
-        }
-        onResp(tempList);
-    }
-
-    // update number of responses
-    const updateResponses = () => {
-
-        let updateObject = {
-            id: id,
-            question: quiz.question
-        }
-        axios.put("/setup/update", updateObject)
-        .then(res => {
-            console.log(res);
-        })
-        .catch(err => console.log(err));
-    }
+    }, [link, quizDone, quizList, respon, id, quiz.question])
 
     // toggles forum or quiz
     let swap = e => {
