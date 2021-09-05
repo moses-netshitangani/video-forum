@@ -52,6 +52,9 @@ const Lesson = () => {
         // send next quiz, if available
         if(quizDone === "yes")
         {
+            // update quiz stats
+            updateResponses();
+            fetchResp();
             fetchStats();
             if(quizList.length > 1)
             {
@@ -59,15 +62,13 @@ const Lesson = () => {
                 onList(newQuizList);
                 onQuiz(newQuizList[0]);
                 onTime(newQuizList[0].time);
-                // let newResp = newQuizList[0].resp;
-                // onResp(respon.concat(newResp));
-                onDone("no");
             }
             else
             {
                 // set quiz time to random large number
                 onTime("90:55");
             }
+            onDone("no");
         }
 
 
@@ -92,8 +93,15 @@ const Lesson = () => {
             onList(res.data[0].quizzes);
             onQuiz(res.data[0].quizzes[0]);
             onTime(res.data[0].quizzes[0].time);
-            // let newResp = [res.data[0].quizzes[0].resp];
-            // onResp(respon.concat(newResp));
+            collectResponses(res.data[0].quizzes);
+        })
+        .catch(err => console.log(err));
+    }
+
+    // fetch responses
+    const fetchResp = () => {
+        axios.get("/setup")
+        .then(res => {
             collectResponses(res.data[0].quizzes);
         })
         .catch(err => console.log(err));
@@ -113,7 +121,12 @@ const Lesson = () => {
 
     // update number of responses
     const updateResponses = () => {
-        axios.put("/setup/update")
+
+        let updateObject = {
+            id: id,
+            question: quiz.question
+        }
+        axios.put("/setup/update", updateObject)
         .then(res => {
             console.log(res);
         })
