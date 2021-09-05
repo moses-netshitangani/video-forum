@@ -33,8 +33,7 @@ router.route('/update').put(async (req, res) => {
         const title = req.body.title;
         const id = req.body.id;
 
-        console.log(`TITLE IS ${title}`);
-
+        // update value
         Chart.findOneAndUpdate({'_id': id, 'stats.title': title}, {'$inc': {
             'stats.$.value': 1
         }})
