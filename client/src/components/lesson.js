@@ -16,6 +16,7 @@ const Lesson = () => {
     const [statsList, onStatsList] = useState([]);
     const [quiz, onQuiz] = useState({});
     const [quizDone, onDone] = useState("no");
+    const [respon, onResp] = useState([]);
     const [time, onTime] = useState("");
     const [lock, onLock] = useState('true');
 
@@ -45,6 +46,7 @@ const Lesson = () => {
 
             // fetch quiz statistics
             fetchStats();
+
         }
         
         // send next quiz, if available
@@ -57,6 +59,8 @@ const Lesson = () => {
                 onList(newQuizList);
                 onQuiz(newQuizList[0]);
                 onTime(newQuizList[0].time);
+                // let newResp = newQuizList[0].resp;
+                // onResp(respon.concat(newResp));
                 onDone("no");
             }
             else
@@ -65,7 +69,9 @@ const Lesson = () => {
                 onTime("90:55");
             }
         }
-    }, [link, quizDone, quizList])
+
+
+    }, [link, quizDone, quizList, respon])
 
     // fetch statistics
     const fetchStats = () => {
@@ -73,8 +79,6 @@ const Lesson = () => {
         .then(res => {
             onStatsList(res.data[0].stats);
             onStatId(res.data[0]._id);
-            console.log("videoforum...");
-            console.log(res.data[0]);
         })
         .catch(err => console.log(err));
     }
@@ -88,6 +92,30 @@ const Lesson = () => {
             onList(res.data[0].quizzes);
             onQuiz(res.data[0].quizzes[0]);
             onTime(res.data[0].quizzes[0].time);
+            // let newResp = [res.data[0].quizzes[0].resp];
+            // onResp(respon.concat(newResp));
+            collectResponses(res.data[0].quizzes);
+        })
+        .catch(err => console.log(err));
+    }
+
+    // collect number of responses
+    const collectResponses = liss => {
+        let tempList = [];
+        for(let i = 0; i < liss.length; i++)
+        {
+            let r = [liss[i].resp];
+            tempList.push(r);
+            console.log(tempList);
+        }
+        onResp(tempList);
+    }
+
+    // update number of responses
+    const updateResponses = () => {
+        axios.put("/setup/update")
+        .then(res => {
+            console.log(res);
         })
         .catch(err => console.log(err));
     }
@@ -206,7 +234,7 @@ const Lesson = () => {
                 </div>
 
                 <div className={statShow}>
-                    <Stats stats={statsList} />
+                    <Stats stats={statsList} resp={respon} />
                 </div>
             </div>
         );

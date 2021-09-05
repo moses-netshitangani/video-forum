@@ -8,6 +8,8 @@ const Stats = props => {
     const [list, onList] = useState([]);
     const [current, onCurrent] = useState([]);
     const [num, onNum] = useState(0);
+    const [respon , onRespon] = useState([]);
+    const [currentRes, onCurrentRes] = useState(0);
 
     // display data for first quiz by default
     useEffect(() => {
@@ -16,6 +18,8 @@ const Stats = props => {
             onList(props.stats);
             onCurrent(props.stats.slice(0, 4));
             onNum(props.stats.length);
+            onRespon(props.resp);
+            onCurrentRes(props.resp[0]);
         }
         
     }, [current.length, props.stats]);
@@ -33,11 +37,13 @@ const Stats = props => {
             {
                 onCurrent(list.slice(0, 4));
                 console.log(list.slice(0, 4));
+                onCurrentRes(respon[0]);
             }
             else
             {
                 onCurrent(list.slice(ind + 1, ind + 5));
                 console.log(list.slice(ind + 1, ind + 5));
+                onCurrentRes(respon[pos + 1]);
             }
         }else
         {
@@ -46,11 +52,13 @@ const Stats = props => {
             {
                 onCurrent(list.slice(num - 4));
                 console.log(list.slice(num - 4));
+                onCurrentRes(respon[Math.floor(num / 4) - 1]);
             }
             else
             {
                 onCurrent(list.slice(ind - 7, ind - 3));
                 console.log(list.slice(ind - 7, ind - 3));
+                onCurrentRes(respon[pos - 1]);
             }
         }
        
@@ -68,6 +76,11 @@ const Stats = props => {
                     </h3>
                 }
             </div>
+
+            {
+                (current === undefined || current.length === 0) ? ''
+                : <h3>{`Responses: ${currentRes}`}</h3>
+            }
 
             {/* legend */}
             {
@@ -106,8 +119,8 @@ const Stats = props => {
                           y={y}
                           dx={dx}
                           dy={dy}
-                          dominant-baseline="central"
-                          text-anchor="middle"
+                          dominantBaseline="central"
+                          textAnchor="middle"
                           style={{
                             fontSize: '4px',
                             fontFamily: 'sans-serif',

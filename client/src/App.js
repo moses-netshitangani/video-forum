@@ -1,5 +1,5 @@
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import VideoForum from './components/videoforum';
+import Lesson from './components/lesson';
 import './App.css';
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
       <Router>
         <div style={{minHeight: '50em'}}>
             <Switch>
-              <Route path="/" exact component={VideoForum}></Route>
+              <Route path="/" exact component={Lesson}></Route>
               {/* <Route path="/stats" component={Stats}></Route>
               <Route path="/setup" component={Admin}></Route> */}
             </Switch>

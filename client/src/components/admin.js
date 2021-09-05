@@ -39,14 +39,15 @@ function Admin () {
             optB: ob,
             optC: oc,
             optD: od,
-            time: t
+            time: t,
+            resp: 0
         };
 
         let statsTemp = [
                 { title: oa, value: 0, color: 'rgba(43, 122, 226, 0.082)' },
                 { title: ob, value: 0, color: 'rgb(147, 184, 201)' },
                 { title: oc, value: 0, color: 'rgba(43, 122, 226, 0.507)' },
-                { title: od, value: 0, color: 'rgba(43, 122, 226, 0.734)' }
+                { title: od, value: 0, color: 'rgba(43, 122, 226, 0.734)' },
         ];
 
         // add quiz and default stats
