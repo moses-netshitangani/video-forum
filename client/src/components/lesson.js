@@ -6,7 +6,7 @@ import Quiz from './quiz';
 import Stats from './stats';
 import Admin from './admin';
 
-const VideoForum = () => {
+const Lesson = () => {
 
     // video, quiz and stats stores
     const [link, onLink] = useState("");
@@ -240,4 +240,4 @@ const VideoForum = () => {
     
 }
 
-export default VideoForum;
+export default Lesson;

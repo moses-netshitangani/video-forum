@@ -48,7 +48,7 @@ const Video = props => {
 
     
 
-    let oP = e => {
+    let pauseVideo = e => {
         // update time string - updates time stamp
         getElapsed();
 
@@ -121,7 +121,7 @@ const Video = props => {
             {/* video player */}
             <ReactPlayer ref={b} className="player" controls
             width="100%" height="100%" style={{margin: '0 auto'}}
-            onProgress={e => {oP(e)}} playing={play}
+            onProgress={e => {pauseVideo(e)}} playing={play}
             url={props.link} />
 
             {/* timestamp button */}
