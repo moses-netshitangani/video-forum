@@ -122,8 +122,7 @@ const Video = props => {
             <ReactPlayer ref={b} className="player" controls
             width="100%" height="100%" style={{margin: '0 auto'}}
             onProgress={e => {pauseVideo(e)}} playing={play}
-            url="https://" />
-            {/* url={props.link} /> */}
+            url={props.link} />
 
             {/* timestamp button */}
             <CopyToClipboard text={timeString} onCopy={popUp}>
