@@ -54,6 +54,7 @@ const Lesson = () => {
             tempList.push(r);
         }
         onResp(tempList);
+        console.log(respon);
     }
 
     
