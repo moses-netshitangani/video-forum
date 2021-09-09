@@ -19,6 +19,8 @@ const Lesson = () => {
     const [respon, onResp] = useState([]);
     const [time, onTime] = useState("");
     const [lock, onLock] = useState('true');
+    const [skip, onSkip] = useState(false);
+    const [btn_show, onBtn_show] = useState("initial");
 
     // forum and quiz display variables
     let [cforum, changeCforum] = useState("show");
@@ -31,8 +33,6 @@ const Lesson = () => {
     const [statShow, onStatShow] = useState("hide");
     const [adminShow, onAdminShow] = useState("hide");
 
-    
-
     // fetch statistics
     const fetchStats = () => {
         axios.get("/stats")
@@ -42,8 +42,6 @@ const Lesson = () => {
         })
         .catch(err => console.log(err));
     }
-
-    
 
     // collect number of responses
     const collectResponses = liss => {
@@ -56,8 +54,6 @@ const Lesson = () => {
         onResp(tempList);
         console.log(respon);
     }
-
-    
 
     // fetch lecture video and quiz data
     useEffect(() => {
@@ -111,7 +107,6 @@ const Lesson = () => {
 
             // fetch quiz statistics
             fetchStats();
-
         }
         
         // send next quiz, if available
@@ -194,6 +189,12 @@ const Lesson = () => {
             onMenu("hide");
     }
 
+    // hides skip quizzes button 
+    const hideBtn = () => {
+        onSkip(true);
+        onBtn_show("hide");
+    }
+
     if(lesson === "flex")
     {
         return (
@@ -225,13 +226,15 @@ const Lesson = () => {
 
                     <div className={`${lesson}`}>
                         <div className="video-forum">
-                            <Video onLock={onLock} time={time} done={quizDone} link={link} foc={swap}/>
+                            <Video onLock={onLock} time={time} done={quizDone} link={link} foc={swap} skip={skip}/>
                             <Forum id={id} cforum={cforum} />
-                            <Quiz id={id} stat_id={stat_id} lock={lock} onLock={onLock} quiz={quiz} onDone={onDone} cquiz={cquiz} />
+                            <Quiz id={id} stat_id={stat_id} lock={lock} skip={skip} onLock={onLock} quiz={quiz} onDone={onDone} cquiz={cquiz} />
                         </div>
                     </div>
 
                 </div>
+
+                <div className={`button-cover skip ${btn_show}`} onClick={hideBtn}>Skip Quizzes</div>
 
             </div>
         );

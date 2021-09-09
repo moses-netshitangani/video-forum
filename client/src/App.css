@@ -161,6 +161,14 @@
   border-right: none;
 }
 
+.skip {
+  height: 2.25em;
+  width: 8em;
+  position: absolute;
+  right: 15%;
+  bottom: 1.5em;
+}
+
 @keyframes showMenu {
   0%{
     color: transparent;

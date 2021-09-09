@@ -49,24 +49,33 @@ const Video = props => {
     
 
     let pauseVideo = e => {
-        // update time string - updates time stamp
-        getElapsed();
 
-        // convert quiz time to seconds and then compare
-        rawSec(`[${props.time}]`);
-        if(Math.floor(e.playedSeconds) >= secnds)
+        if(!props.skip)
         {
-            onPlayChange(false);
-            seekBack();
-            props.foc('q');
-            props.onLock('false');
+             // update time string - updates time stamp
+            getElapsed();
+
+            // convert quiz time to seconds and then compare
+            rawSec(`[${props.time}]`);
+            if(Math.floor(e.playedSeconds) >= secnds)
+            {
+                onPlayChange(false);
+                seekBack();
+                props.foc('q');
+                props.onLock('false');
+            }
+            else
+            {
+                props.onLock('lock');
+                if(e.playedSeconds >= 1)
+                    onPlayChange(true);
+            }
         }
         else
         {
             props.onLock('lock');
-            if(e.playedSeconds >= 1)
-                onPlayChange(true);
         }
+       
     }
 
 
