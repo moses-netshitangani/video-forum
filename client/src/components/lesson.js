@@ -215,17 +215,23 @@ const Lesson = () => {
                     </h2>
                 </div>
 
-                <div className={`${lesson}`}>
-                    {/* switch between quiz and forum */}
-                    <div className={`switch-tab`} onClick={() => {swap('q')}}>Quiz</div>
-                    <div className={`switch-tab frm`} onClick={() => {swap('f')}}>Forum</div>
-
-                    <div className="video-forum">
-                        <Video onLock={onLock} time={time} done={quizDone} link={link} foc={swap}/>
-                        <Forum id={id} cforum={cforum} />
-                        <Quiz id={id} stat_id={stat_id} lock={lock} onLock={onLock} quiz={quiz} onDone={onDone} cquiz={cquiz} />
+                <div className="lesson-cover">
+                    
+                    <div className="tog-btns">
+                        <div className={`switch-tab frm`} onClick={() => {swap('f')}}>Forum</div>
+                        <div className={`switch-tab`} onClick={() => {swap('q')}}>Quiz</div>
                     </div>
+
+                    <div className={`${lesson}`}>
+                        <div className="video-forum">
+                            <Video onLock={onLock} time={time} done={quizDone} link={link} foc={swap}/>
+                            <Forum id={id} cforum={cforum} />
+                            <Quiz id={id} stat_id={stat_id} lock={lock} onLock={onLock} quiz={quiz} onDone={onDone} cquiz={cquiz} />
+                        </div>
+                    </div>
+
                 </div>
+
             </div>
         );
     }
