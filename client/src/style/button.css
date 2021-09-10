@@ -1,8 +1,8 @@
 .button-cover {
     box-sizing: border-box;
     padding: 0.3em 0 0 0;
-    width: 100%;
-    height: 100%;
+    width: 10em;
+    height: 2.25em;
     border-radius: 0.5em;
     box-shadow: 0 0.188em 1.550em -0.525em rgb(65, 63, 63);
     transition: transform 0.5s;
@@ -18,9 +18,6 @@
 .button-outer {
     width: 8em;
     height: 2em;
-    /* position: absolute;
-    bottom: 1.5em;
-    left: 25em; */
 }
 
 .button-lock {
