@@ -99,7 +99,9 @@ const Video = props => {
         }
 
         // time
+        let ts = `[${mins}:${secs}]`;
         onTimeString(`[${mins}:${secs}]`);
+        props.onTimeString(ts);
     }
 
     // get time elapsed
@@ -134,9 +136,9 @@ const Video = props => {
             url={props.link} />
 
             {/* timestamp button */}
-            <CopyToClipboard text={timeString} onCopy={popUp}>
+            {/* <CopyToClipboard text={timeString} onCopy={popUp}>
                 <Button bLock={bLock}/>
-            </CopyToClipboard>
+            </CopyToClipboard> */}
 
             {/* timestamp popup */}
             <div className={pop}>

@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../style/button.css';
 
 const Button = props => {
+
+    useEffect (() => console.log(props.onClick));
     
     return(
         <div className='button-outer'>

@@ -5,6 +5,9 @@ import Video from './video';
 import Quiz from './quiz';
 import Stats from './stats';
 import Admin from './admin';
+import Button from './button';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+
 
 const Lesson = () => {
 
@@ -21,6 +24,7 @@ const Lesson = () => {
     const [lock, onLock] = useState('true');
     const [skip, onSkip] = useState(false);
     const [btn_show, onBtn_show] = useState("initial");
+    const [timeString, onTimeString] = useState("");
 
     // forum and quiz display variables
     let [cforum, changeCforum] = useState("show");
@@ -224,17 +228,31 @@ const Lesson = () => {
                         <div className={`switch-tab`} onClick={() => {swap('q')}}>Quiz</div>
                     </div>
 
-                    <div className={`${lesson}`}>
+                    <div className={`${lesson} tess`}>
                         <div className="video-forum">
-                            <Video onLock={onLock} time={time} done={quizDone} link={link} foc={swap} skip={skip}/>
+                            <Video onLock={onLock} time={time} onTimeString={onTimeString} done={quizDone} 
+                            link={link} foc={swap} skip={skip}/>
                             <Forum id={id} cforum={cforum} />
-                            <Quiz id={id} stat_id={stat_id} lock={lock} skip={skip} onLock={onLock} quiz={quiz} onDone={onDone} cquiz={cquiz} />
+                            <Quiz id={id} stat_id={stat_id} lock={lock} skip={skip} onLock={onLock} 
+                            quiz={quiz} onDone={onDone} cquiz={cquiz} />
+                        </div>
+                    </div>
+
+                    <div className="spc"></div>
+
+                    <div className="main-btns" >
+                        <div id="first-btn">
+                            <CopyToClipboard text={timeString} >
+                                <Button />
+                            </CopyToClipboard>
+                        </div>
+                        <div id="scnd-btn">
+                            <div className={`button-cover skip ${btn_show}`} onClick={hideBtn}>Continuous Play</div>
                         </div>
                     </div>
 
                 </div>
 
-                <div className={`button-cover skip ${btn_show}`} onClick={hideBtn}>Skip Quizzes</div>
 
             </div>
         );

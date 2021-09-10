@@ -16,11 +16,11 @@
 }
 
 .button-outer {
-    width: 10%;
-    height: 5%;
-    position: absolute;
+    width: 8em;
+    height: 2em;
+    /* position: absolute;
     bottom: 1.5em;
-    left: 25em;
+    left: 25em; */
 }
 
 .button-lock {
