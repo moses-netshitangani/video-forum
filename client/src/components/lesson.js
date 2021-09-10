@@ -37,6 +37,12 @@ const Lesson = () => {
     const [statShow, onStatShow] = useState("hide");
     const [adminShow, onAdminShow] = useState("hide");
 
+    // timestamp pop up display
+    const [pop, OnPop] = useState("hide");
+
+    // locks time stamp button
+    const [bLock, onbLock] = useState("hide");
+
     // fetch statistics
     const fetchStats = () => {
         axios.get("/stats")
@@ -47,17 +53,7 @@ const Lesson = () => {
         .catch(err => console.log(err));
     }
 
-    // collect number of responses
-    const collectResponses = liss => {
-        let tempList = [];
-        for(let i = 0; i < liss.length; i++)
-        {
-            let r = [liss[i].resp];
-            tempList.push(r);
-        }
-        onResp(tempList);
-        console.log(respon);
-    }
+    
 
     // fetch lecture video and quiz data
     useEffect(() => {
@@ -83,6 +79,18 @@ const Lesson = () => {
                 collectResponses(res.data[0].quizzes);
             })
             .catch(err => console.log(err));
+        }
+
+        // collect number of responses
+        const collectResponses = liss => {
+            let tempList = [];
+            for(let i = 0; i < liss.length; i++)
+            {
+                let r = [liss[i].resp];
+                tempList.push(r);
+            }
+            onResp(tempList);
+            console.log(respon);
         }
 
         // update number of responses
@@ -199,6 +207,23 @@ const Lesson = () => {
         onBtn_show("hide");
     }
 
+    // display pop up for 3s
+    const popUp = () => {
+        // show pop up and lock button
+        onbLock("button-lock");
+        OnPop("stamp");
+
+        setTimeout(function ()
+        {
+            // hide popup
+            OnPop("hide");
+
+            // unlock time stamp button
+            onbLock("hide");
+        }, 3000);
+        
+    }
+
     if(lesson === "flex")
     {
         return (
@@ -242,13 +267,18 @@ const Lesson = () => {
 
                     <div className="main-btns" >
                         <div id="first-btn">
-                            <CopyToClipboard text={timeString} >
-                                <Button />
+                            <CopyToClipboard text={timeString} onCopy={popUp} >
+                                <Button bLock={bLock} />
                             </CopyToClipboard>
                         </div>
                         <div id="scnd-btn">
                             <div className={`button-cover skip ${btn_show}`} onClick={hideBtn}>Continuous Play</div>
                         </div>
+                    </div>
+
+                    <div className={pop}>
+                        <p><b>Time-stamp copied to clipboard.</b></p>
+                        <p><b>Use Ctrl + V to paste when on the forum.</b></p>
                     </div>
 
                 </div>

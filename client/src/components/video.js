@@ -1,7 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import ReactPlayer from 'react-player';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
-import Button from './button';
 import "../style/video.css";
 
 const Video = props => {
@@ -16,12 +14,6 @@ const Video = props => {
 
     // to control when to pause and take quiz
     const [play, onPlayChange] = useState(false);
-
-    // timestamp pop up display
-    const [pop, OnPop] = useState("hide");
-
-    // locks time stamp button
-    const [bLock, onbLock] = useState("hide");
 
     useEffect(() => {
         if(props.done === "yes")
@@ -110,23 +102,6 @@ const Video = props => {
         processTime(time);
     }
 
-    // display pop up for 3s
-    const popUp = () => {
-        // show pop up and lock button
-        onbLock("button-lock");
-        OnPop("stamp");
-
-        setTimeout(function ()
-        {
-            // hide popup
-            OnPop("hide");
-
-            // unlock time stamp button
-            onbLock("hide");
-        }, 3000);
-        
-    }
-
     return(
         <div className="video-cover">
             {/* video player */}
@@ -134,17 +109,6 @@ const Video = props => {
             width="100%" height="100%" style={{margin: '0 auto'}}
             onProgress={e => {pauseVideo(e)}} playing={play}
             url={props.link} />
-
-            {/* timestamp button */}
-            {/* <CopyToClipboard text={timeString} onCopy={popUp}>
-                <Button bLock={bLock}/>
-            </CopyToClipboard> */}
-
-            {/* timestamp popup */}
-            <div className={pop}>
-                <p><b>Time-stamp copied to clipboard.</b></p>
-                <p><b>Use Ctrl + V to paste when on the forum.</b></p>
-            </div>
         </div>
 
     );

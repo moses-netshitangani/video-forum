@@ -103,7 +103,13 @@ function Admin () {
         <div>
             <div className='admin-cover'>
 
+                <div className="steps">
+                    <div>Step 1</div>
+                    <div>Step 2</div>
+                </div>
+                
                 <div className='create-content'>
+                    
                     {/* Lecture Video */}
                     <div className='create-video'>
 
@@ -143,10 +149,7 @@ function Admin () {
                 
             </div>
 
-            <div className="steps">
-                <div>Step 1</div>
-                <div>Step 2</div>
-            </div>
+            
             
         </div>
     );
