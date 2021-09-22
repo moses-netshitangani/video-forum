@@ -7,7 +7,6 @@
 }
 
 .stamp {
-    background-color: rgba(43, 122, 226, 0.082);
     color: rgba(61, 121, 250, 0.651);
     border-radius: 0.75em;
     position: absolute;
@@ -34,7 +33,7 @@
     0%{
       bottom: 0%;
       transform: scale(0.75);
-      background-color: white
+      background-color: white;
     }
     50%{
         bottom: 50%;
